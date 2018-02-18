@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class ObjectPicker : MonoBehaviour {
 
-    public Camera MainCamera;
-
+    private Camera MainCamera;
+    
     public Pickable PickedObject;
     private PopupMenu popupMenu;
 
     private bool touchDowned = false;
+
+    private void Start()
+    {
+        MainCamera = Camera.main;
+    }
 
     private void Update()
     {
