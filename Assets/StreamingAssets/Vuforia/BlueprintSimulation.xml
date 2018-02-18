@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="Sofa" size="30.000000 15.131579" />
+    <ImageTarget name="Television" size="30.000000 15.131579" />
+    <ImageTarget name="Refrigerator" size="30.000000 15.131579" />
+    <ImageTarget name="Table" size="30.000000 15.131579" />
+    <ImageTarget name="Bookshelf" size="30.000000 15.131579" />
+    <ImageTarget name="Wardrobe" size="30.000000 15.131579" />
+    <ImageTarget name="Desk" size="30.000000 15.131579" />
+    <ImageTarget name="Bed" size="30.000000 15.131579" />
+  </Tracking>
+</QCARConfig>
