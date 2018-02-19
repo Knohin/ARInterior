@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Test.unity
+    path: Assets/_Scenes/BlueprintSimulation.unity
     guid: 225faf5b2da3ba24fb2258b66ff294e6
+  - enabled: 0
+    path: Assets/_Scenes/GroundPlaneTest.unity
+    guid: 4c99db292d1fcc84eac5bed91a6839f3
