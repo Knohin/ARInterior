@@ -4,5 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Pickable : MonoBehaviour {
+
     public PopupMenu popupMenu;
+
 }

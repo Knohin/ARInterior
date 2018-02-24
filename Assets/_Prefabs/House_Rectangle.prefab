@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114692954223910000}
   - component: {fileID: 114812095293224666}
   - component: {fileID: 114851071247151360}
+  - component: {fileID: 114691535206517680}
   m_Layer: 5
   m_Name: PopupMenuCanvas
   m_TagString: Untagged
@@ -616,7 +617,6 @@ GameObject:
   - component: {fileID: 224617544811001474}
   - component: {fileID: 222007866134927414}
   - component: {fileID: 114219126919437216}
-  - component: {fileID: 114374660151114442}
   m_Layer: 5
   m_Name: DoorMenuPanel
   m_TagString: Untagged
@@ -2515,18 +2515,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114682545735409832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114102459815225950}
-        m_MethodName: OpenWIndowA
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114080438832413274
@@ -2600,18 +2589,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114052230864931420}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114102459815225950}
-        m_MethodName: CloseAll
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114091748566164108
@@ -2672,10 +2650,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a49bdec43246243bea2fc2b1202c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 114065887285554150}
-  - {fileID: 114564358131228294}
-  - {fileID: 114080653337524576}
+  OpenAButton: {fileID: 114065887285554150}
+  OpenBButton: {fileID: 114564358131228294}
+  CloseButton: {fileID: 114080653337524576}
 --- !u!114 &114192062287587548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2760,20 +2737,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupMenu: {fileID: 114102459815225950}
---- !u!114 &114374660151114442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1825450162697618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a49bdec43246243bea2fc2b1202c58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 114003476920603992}
-  - {fileID: 114423035997053102}
 --- !u!114 &114423035997053102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2876,18 +2839,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114896355525372460}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 114102459815225950}
-        m_MethodName: OpenWIndowB
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114581505389022308
@@ -2962,6 +2914,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114691535206517680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1140448146687926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c1d319a61a85af45a77311131825bd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114692954223910000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3367,7 +3330,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1140448146687926}
   m_LocalRotation: {x: 0.18570343, y: -0.5008305, z: 0.110975884, w: 0.8380737}
-  m_LocalPosition: {x: 0, y: 0, z: 2.82}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.009999997, z: 0.01}
   m_Children:
   - {fileID: 224676078846165340}
@@ -3377,7 +3340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -3.42, y: 1.865}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224798664516826828

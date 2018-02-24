@@ -6,7 +6,7 @@ public class AlignToCamera : MonoBehaviour {
 
     private Camera TargetCamera;
 
-    private void Awake()
+    private void Start()
     {
         TargetCamera = Camera.main;
     }
