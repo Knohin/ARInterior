@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class JsonManager : MonoBehaviour {
 
     public GameObject ObjectToSave;
-    public Text TextField;
+    private Text TextFieldToPrint;
 
     private void Start()
     {
@@ -16,16 +16,27 @@ public class JsonManager : MonoBehaviour {
             return;
         }
         SaveObjectTo("path:");
+
+        // 출력할 Text 찾기
+        TextFieldToPrint = GameObject.Find("TextForDebug").GetComponent<Text>();
+
+        // 버튼에 이벤트 달기
+        Button PrintButton = GameObject.Find("Button").GetComponent<Button>();
+        PrintButton.onClick.AddListener(PrintObjectInJson);
+    }
+
+    public void PrintObjectInJson()
+    {
+        string json = JsonUtility.ToJson((Object)ObjectToSave.GetComponent<SerializedObject>());
+        TextFieldToPrint.text = json;
     }
 
     public void SaveObjectTo(string path)
     {
-        string json = JsonUtility.ToJson((Object)ObjectToSave.GetComponent<SerializedObject>());
-        TextField.text = json;
+        // TOOD: Implement
     }
 
     public void LoadObjectFrom(string path)
     {
-        // TOOD: Implement
     }
 }
