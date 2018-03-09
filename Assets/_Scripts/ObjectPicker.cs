@@ -1,53 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ObjectPicker : MonoBehaviour {
 
-    public Pickable PickedObject;
+    public Camera MainCamera;
 
-    private void Awake()
-    {
-        this.tag = "MainCamera";
-    }
-    
+    public GameObject PickedObject;
+    public PopupMenu popupMenu; 
+
+    private int i = 0;
 
     private void Update()
     {
-        PickAndPopup();
-    }
-
-    private void PickAndPopup()
-    {
-        Vector2 pos;
-#if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-                return;
-            pos = Input.mousePosition;
-#else
-        if (0 < Input.touchCount
-            && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
-                return;
-            pos = Input.GetTouch(0).position;
-#endif
-            Ray ray = Camera.main.ScreenPointToRay(pos);
+            Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+
+            Physics.Raycast(ray, out hit);
+            if (PickedObject != hit.transform.gameObject)
             {
-                PickedObject = hit.transform.GetComponent<Pickable>();
-                if(PickedObject != null)
-                {
-                    PickedObject.popupMenu.gameObject.SetActive(true);
-                    PickedObject.popupMenu.transform.position = hit.point - ray.direction * 0.4f;
-                }
+                if (null != popupMenu)
+                    popupMenu.gameObject.SetActive(false);
+                popupMenu = null;
+                PickedObject = hit.transform.gameObject;
+                popupMenu = PickedObject.GetComponent<Pickable>().popupMenu;
             }
+
+            if (null != popupMenu 
+                && !popupMenu.gameObject.activeSelf)
+            {
+                popupMenu.gameObject.SetActive(true);
+            }
+
+        }
+        if (0 < Input.touchCount)
+        {
+            Ray ray = MainCamera.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
+
+            Physics.Raycast(ray, out hit);
+            if (PickedObject != hit.transform.gameObject)
+            {
+                if (null != popupMenu)
+                    popupMenu.gameObject.SetActive(false);
+                popupMenu = null;
+                PickedObject = hit.transform.gameObject;
+                popupMenu = PickedObject.GetComponent<Pickable>().popupMenu;
+            }
+
+            if (null != popupMenu
+                && !popupMenu.gameObject.activeSelf)
+            {
+                popupMenu.gameObject.SetActive(true);
+            }
+
         }
     }
-
-
 }

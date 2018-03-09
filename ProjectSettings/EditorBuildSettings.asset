@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_Scenes/BlueprintSimulation.unity
-    guid: 225faf5b2da3ba24fb2258b66ff294e6
-  - enabled: 0
-    path: Assets/_Scenes/GroundPlaneTest.unity
-    guid: 4c99db292d1fcc84eac5bed91a6839f3
   - enabled: 1
-    path: Assets/_Scenes/GyroscopeTest.unity
-    guid: 4a9e9771bd2871a4b8cca91b323a3e51
+    path: Assets/ar.unity
+    guid: 4c706af6db5083c4eb85d557a56805e5
+  - enabled: 1
+    path: Assets/3d.unity
+    guid: 2007b8fd543bb224c9f98967361aec47
