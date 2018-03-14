@@ -11,14 +11,17 @@ public class imagetargeting : MonoBehaviour {
     // Use this for initialization
     void Start () {
         arCamera = GameObject.Find("ARCamera");
-        um = GameObject.Find("userMat");
+        um = GameObject.Find("MasterPlane");
         um.transform.TransformPoint(arCamera.transform.localPosition);
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        um.transform.TransformPoint(arCamera.transform.localPosition);
-        Debug.Log("um's position"+um.transform.position);
+        if (um)
+        {
+            um.transform.TransformPoint(arCamera.transform.localPosition);
+            Debug.Log("um's position" + um.transform.position);
+        }
     }
 }

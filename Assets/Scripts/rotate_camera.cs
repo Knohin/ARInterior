@@ -11,6 +11,10 @@ public class rotate_camera : MonoBehaviour {
 
     public Camera mainCa;
 
+    //for thinking Canvas status
+    Canvas Canvas3d;
+    Canvas Canvasar;
+
     // Use this for initialization
     void Start()
     {
@@ -19,6 +23,22 @@ public class rotate_camera : MonoBehaviour {
         //backup position, rotation
         backupPosition = mainCa.transform.position;
         backupRotation = mainCa.transform.rotation;
+
+        Canvas3d = GameObject.Find("3dCanvas").GetComponent<Canvas>();
+        Canvasar = GameObject.Find("arCanvas").GetComponent<Canvas>();
+    }
+    
+    bool checkGameState3d()
+    {
+        if (this.Canvas3d.enabled)
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
     }
 
     //touch sensor
@@ -56,37 +76,40 @@ public class rotate_camera : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //touch sensor
-        int tCount = Input.touchCount;
+        if (checkGameState3d())
+        {
+            //touch sensor
+            int tCount = Input.touchCount;
 
-        //why need to 'for_loop'
-        for (int i = 0; i < tCount; i++)
-        {
-            if (Input.GetTouch(i).phase == TouchPhase.Began)
+            //why need to 'for_loop'
+            for (int i = 0; i < tCount; i++)
             {
-                inputTouch(Input.GetTouch(i).position);
+                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                {
+                    inputTouch(Input.GetTouch(i).position);
+                }
+                else if (Input.GetTouch(i).phase == TouchPhase.Moved)
+                {
+                    inputMove(Input.GetTouch(i).position);
+                }
+                else if (Input.GetTouch(i).phase == TouchPhase.Ended)
+                {
+                    break;
+                }
             }
-            else if (Input.GetTouch(i).phase == TouchPhase.Moved)
-            {
-                inputMove(Input.GetTouch(i).position);
-            }
-            else if (Input.GetTouch(i).phase == TouchPhase.Ended)
-            {
-                break;
-            }
-        }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            inputTouch(Input.mousePosition);
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            inputMove(Input.mousePosition);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            //setting up function
+            if (Input.GetMouseButtonDown(0))
+            {
+                inputTouch(Input.mousePosition);
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                inputMove(Input.mousePosition);
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                //setting up function
+            }
         }
     }
 }

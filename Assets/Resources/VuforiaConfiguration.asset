@@ -8,12 +8,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
+  m_Script: {fileID: -2067402452, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: AXkpCI3/////AAAAmYUDzu++1UyFsgwTLfH4RZsHyCdmZ/AFFVBdPOnamQhxhrgvKc40T0r1TTQv3F5kDwrtu7yvZ/lTkwRzIabgqIyBxg6hs+cdXxieR8UtzTx7cF3+fJF8JfLqF3zKZLjY0hDFIaFkYndT2ETW1GEfhulI0BYBeD0OABmsU5qyj86dw+ADAxX4kp6WXqGSIc8VGBS9b5EJ4UivBQqyCQRHbpNVSSwSGrlLvb8SB7diDMg98OSyU2Yx6alEtYsGkScMLNMTZy7WmOTtG3LFzTU7h2usawl+qFZkABb5YmWzexBg2if/jIvihmVvhbhemIWI019miTTvtl2A3FZeOiW8zd2S1PCm7yqana9fszKJsTb/
-    ufoLicenseKey: QWV4K0dsSC8vLy8vQUFBQUtKaGdTa0hDV1VERXJOTm8vTVRaVVdpTktsMEdDQ1J2WlhWWG1mVm8wckJVVkgzTTFxUkMrOXI3N3BnWURZdEl2cktSSjBpWFcxMzJSTHRPNEdqMnQxT0F1WXdZRjU2T3NjMkxiOXJHU3RrRE1DQnRqNmJuQUx6NjJleXhSVWJlUlFZbG1hdlpCZXhSbzJ4bWFucEdwZ1RXNzFRc1ZaaGxwWWZGVi9ja2M4RkljbTBOQjc1RzhmVXdBeEpscHQ3UHcxZU9rYS81QWU3RllVNG9ucExNcDk3Umg5STRtL2dJMUZTL0tsT1RhSUpnd3B5NElEWmhLQTRRdTg4YkNyWG1nK1ROcUFyNFVqYUlLL1BvaUxBSlB5Ym1pZ2J1WHZFUUgwQVZ1ZjRHYnpqTjhUYjZNVlQ1NU9sVGtiVkh4ZzlRNU4yNnQ2a3BXQXRYSXhOd2NRN2xyLzA2d2ZkZkpSWlg5eldLc3ppWVpnZys=
+    vuforiaLicenseKey: ATEWtyD/////AAAAmdDvLfVkmE/Huz2I3T7pRlJQ9OHjBrI3y/3pAtxmZ6AmPIfBeQvLg4jCXeR7VcCE785bZJjSqz6GEn8LZzxqUHRDDUP3D6MJjlCT3MVEMYIV68iNsp7R61pLToC00NgdSTGPNpSLpBhshbIqHxhxMoxbvpJ7wGvv221xOTfRMj1inMxhGldGO8TKsuYWRKcdHUxsl4iwAR+NzcQQKUIIEYv9ADclGU1mMEZ3TgfwNRs3gyOqrQHvuycnkwLr0Is01FVjXx4J9JzAn3yZefDqR7sf8g55fjhEcouzK9xFjIqCo0D4dok3Z5X2tY0QgekBBdXI7qabkBnrKSWIUplb46q/3b6ocpbSfMuzyQMP/Fsy
+    ufoLicenseKey: QVdjbTlTWC8vLy8vQUFBQUtITGw1d1BOVzB2dW82RU5zVFdQVjFncjRzaHdxbkI5RzdoUmZ0WHB2NC9renFNTVJKS3p6aVc3TFpsTzAyUEtKMnREVlZZdThNS1JJTUlDNWhIRVBNckZ5ZjI3S3RpUGhOM1crZHBzU2dWUGs0TEU4YStmVXJ5c0JiNVRXTTlDdHBZZWZVRDNLTDRScnVVQ1BEZVA1MzZldDhCK2g0OUF3bWZFYy9pTzluNGtXdEl6RHRENFl5UTdocklJcHRxVXdRYTVDRURDMWpoOFJZQkUyeVBicmd1N2VZOGx5Z3pFRUV2cEpPdU1VbC9tbHo4SHZKWUgyWkxpUmdidVMzSittOWlkSS96Mkl3eGUvZXUwSmdIN0hrUmNYU28zRHR5ZVZzdDVTNFdFS3RKSnJPT3J2RVZtYnJuU09GcGpIeHBtQUx2ZWFpaHJOTGh2cmM3emhxSFhudm5ZQktBb3pndGNkUk12Mm9EeUNNcG8=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 1
@@ -27,8 +27,8 @@ MonoBehaviour:
     eyewearType: 0
     stereoFramework: 0
     seeThroughConfiguration: 0
-    viewerName: Generic Cardboard
-    viewerManufacturer: Vuforia
+    viewerName: 
+    viewerManufacturer: 
     useCustomViewer: 0
     customViewer:
       Version: 0
@@ -44,13 +44,13 @@ MonoBehaviour:
       ContainsMagnet: 0
   databaseLoad:
     dataSetsToLoad:
+    - VuforiaTest_DB
     - VuforiaMars_Images
     - VuforiaMars_VuMark
-    - VuforiaTest_DB
     dataSetsToActivate:
+    - VuforiaTest_DB
     - VuforiaMars_Images
     - VuforiaMars_VuMark
-    - VuforiaTest_DB
   videoBackground:
     clippingMode: 0
     numDivisions: 2
@@ -70,7 +70,7 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: DroidCam Source 3
+    deviceNameSetInEditor: 
     flipHorizontally: 0
     turnOffWebCam: 0
     renderTextureLayer: 30

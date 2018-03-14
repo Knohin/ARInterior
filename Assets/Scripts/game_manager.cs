@@ -7,6 +7,7 @@ public class game_manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        /*
         GameObject[] objarr= SceneManager.GetSceneByName("3d").GetRootGameObjects();
         foreach (GameObject tempGO in objarr)
         {
@@ -15,6 +16,7 @@ public class game_manager : MonoBehaviour {
                 tempGO.GetComponent<Canvas>().enabled = false;
             }
         }
+        */
 	}
 	
 	// Update is called once per frame

@@ -18,17 +18,26 @@ public class zoom : MonoBehaviour {
     public GameObject tar;
     public Text mytext;
     public Text mytext2;
+    
+    //for thinking Canvas status
+    Canvas Canvas3d;
+    Canvas Canvasar;
+
     Ray ray;
     // Use this for initialization
 	void Start () {
     //    tar = GameObject.Find("ImageTarget");
         mytext = GameObject.Find("testtext").GetComponent<Text>();
         mytext.text = "first setting";
+
+        Canvas3d = GameObject.Find("3dCanvas").GetComponent<Canvas>();
+        Canvasar = GameObject.Find("arCanvas").GetComponent<Canvas>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if(Input.touchCount >= 2)// Zoomin, Zoomout
+
+        if(Input.touchCount >= 2 && Canvasar.enabled)// Zoomin, Zoomout
         {
             cur = Input.GetTouch(0).position - Input.GetTouch(1).position;
             Prev = ((Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition)

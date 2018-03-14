@@ -5,9 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class switching_camera : MonoBehaviour {
-
+    int s_w, s_h;
     public Camera caAr;     //AR camera
-    public Camera caAr2;     //3d's AR camera
     public Camera ca;       //main camera
 
     public GameObject masterGO;
@@ -24,15 +23,32 @@ public class switching_camera : MonoBehaviour {
     {
         caAr.enabled = true;
         ca.enabled = false;
+        GameObject.Find("3dCanvas").GetComponent<Canvas>().enabled = false;
+
+        //Setting default
+        //why?? buttonclick event로 구현하기에 초기 설정이 되어있지 않음
+        //다른방법으로는 update문에 해당 buttonclick() 함수 내용을 넣고
+        //eventListener를 통해 추가시키는 방법 있을것.
+        bttext = GameObject.Find("bttext").GetComponent<Text>();
+        testtext = GameObject.Find("testtext").GetComponent<Text>();
+        testtext2 = GameObject.Find("testtext2").GetComponent<Text>();
+        
+        s_w = Screen.width;
+        s_h = Screen.height;
+        //        GameObject.Find("3dCanvas").GetComponent<Canvas>();
+        //3d, ar에 따라 줌인아웃 가능하도록 구현
+        //canvas 해당 화면 비율 맞도록, 가로, 세로 돌릴시 자동 위치 잡도록 anchar?달것
     }
 
     public void ButtonClick()
     {
+        //Vuforia.VuforiaBehaviour.Instance.enabled = false;
+        //change ar
         if (bttext.text.Equals("caAr"))
         {
             bttext.text = "ca";
 
-            originGO = SceneManager.GetSceneByName("3d").GetRootGameObjects();
+            originGO = SceneManager.GetSceneByName("ar").GetRootGameObjects();
             int masterPindex = 0;
             foreach (GameObject tempGO in originGO)
             {
@@ -40,9 +56,13 @@ public class switching_camera : MonoBehaviour {
                 {
                     dupmasterGO = originGO[masterPindex];
                 }
-                else if (tempGO.transform.name.Equals("Canvas"))
+                else if (tempGO.transform.name.Equals("3dCanvas"))
                 {
                     tempGO.GetComponent<Canvas>().enabled = false;
+                }
+                else if (tempGO.transform.name.Equals("arCanvas"))
+                {
+                    tempGO.GetComponent<Canvas>().enabled = true;
                 }
                 masterPindex++;
             }
@@ -67,7 +87,6 @@ public class switching_camera : MonoBehaviour {
             //turn on caAr
             caAr.enabled = true;
             ca.enabled = false;
-            caAr2.enabled = false;
             //SceneManager.LoadScene("ar");
         }
         else if (bttext.text.Equals("ca"))
@@ -81,12 +100,11 @@ public class switching_camera : MonoBehaviour {
             
             ca.enabled = true;
             caAr.enabled = false;
-            caAr2.enabled = false;
 
             testtext.text = GOarr.Length.ToString();
             //SceneManager.LoadScene("3d");
 
-            originGO = SceneManager.GetSceneByName("3d").GetRootGameObjects();
+            originGO = SceneManager.GetSceneByName("ar").GetRootGameObjects();
 
             int masterPindex=0;
             //testtext.text = masterPindex.ToString();
@@ -97,9 +115,13 @@ public class switching_camera : MonoBehaviour {
                 {
                     dupmasterGO = originGO[masterPindex];
                 }
-                else if (tempGO.transform.name.Equals("Canvas"))
+                else if (tempGO.transform.name.Equals("3dCanvas"))
                 {
                     tempGO.GetComponent<Canvas>().enabled = true;
+                }
+                else if (tempGO.transform.name.Equals("arCanvas"))
+                {
+                    tempGO.GetComponent<Canvas>().enabled = false;
                 }
                 masterPindex++;
                 //testtext2.text = masterPindex.ToString();
