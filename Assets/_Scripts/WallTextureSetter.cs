@@ -1,4 +1,11 @@
-﻿using System.Collections;
+﻿/*
+ * 설명 : 어떤 Mesh의 크기에 알맞게 UV 맵핑을 하고 싶을 때 사용하면,
+ *      Start 시점에 MainTextureToSet변수에 세팅된 텍스쳐로 Material을 바꾼다.
+ * 
+ * 사용법 :
+ *  메쉬를 가진 오브젝트에 추가하고, Inspector에서 MainTextureToSet을 정해준다.
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

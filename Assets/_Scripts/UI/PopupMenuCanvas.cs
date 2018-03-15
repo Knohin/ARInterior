@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * 설명 : 
+ *      이 스크립트를 PopupMenu가 있는 캔버스에 추가한다. 그러면
+ *      클릭(혹은 터치)으로 PopupMenu가 선택되지 않으면(즉, PopupMenu 바깥쪽을 클릭할 시)
+ *      Child로 있는 PopupMenu를 inactive한다.
+ */
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,13 +12,13 @@ using UnityEngine.EventSystems;
 
 public class PopupMenuCanvas : MonoBehaviour {
 
-    GraphicRaycaster gr;
+    private GraphicRaycaster gr;
 
     private void Start()
     {
         gr = GetComponent<GraphicRaycaster>();
 
-        SetChildrenActive(false);
+        //SetChildrenActive(false);
     }
 
     private void Update()

@@ -1,4 +1,11 @@
-﻿#if UNITY_EDITOR
+﻿/*
+ * 에디터에서만 쓰려고 만든거
+ * 
+ * 아무 모브젝트에 달아두면,
+ * 마우스 우클릭후 회전 : 카메라 회전
+ * WASD QE : 카메라 이동
+ */
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

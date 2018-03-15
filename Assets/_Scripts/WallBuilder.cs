@@ -1,7 +1,17 @@
-﻿using System.Collections;
+﻿/* 
+ * 설명 :
+ *  클릭(혹은 터치) 를 이용해 4개의 점을 찍으면 그 점을 꼭지점으로 하는 사각형의 벽이 만들어진다.
+ *  TODO >> 아직 시계방향 순서로 클릭해야 유효하다.
+ * 
+ * 사용법 : 
+ *  아무 GameObject에 붙이면 된다.
+ */
+
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using UnityEditor;
 
 public class WallBuilder : MonoBehaviour {
 
@@ -39,6 +49,7 @@ public class WallBuilder : MonoBehaviour {
                 touchCount++;
                 if (touchCount == 4)
                 {
+                    ReviseIndex();
                     BuildWall();
                     touchCount = 0;
                 }
@@ -186,7 +197,71 @@ public class WallBuilder : MonoBehaviour {
 
 
         mr.material = new Material(Shader.Find("Standard"));
-        //mr.material = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Material.mat");
-        AssetDatabase.CreateAsset(newMesh, "Assets/SavedMeshes/test.asset");
+        //SaveMeshToPath(newMesh, "testmesh");
+        //mf.mesh = LoadMeshFromPath("testmesh");
     }
+
+    private void LoadWall(string filename="testmesh")
+    {
+        GameObject obj = new GameObject("LoadedWall");
+        MeshFilter mf = obj.AddComponent<MeshFilter>();
+        MeshRenderer mr = obj.AddComponent<MeshRenderer>();
+
+        Mesh newMesh = new Mesh();
+
+        newMesh = LoadMeshFromPath(filename);
+
+        newMesh.RecalculateBounds();
+
+        mf.mesh = newMesh;
+        mr.material = new Material(Shader.Find("Standard"));
+    }
+
+    private void SaveMeshToPath(Mesh mesh, string path)
+    {
+        string fullPath = Path.Combine(Application.persistentDataPath, path);
+        byte[] bytes = MeshSerializer.WriteMesh(mesh, true);
+        File.WriteAllBytes(fullPath, bytes);
+    }
+    private Mesh LoadMeshFromPath(string path)
+    {
+        string fullPath = Path.Combine(Application.persistentDataPath, path);
+        if (File.Exists(fullPath) == true)
+        {
+            byte[] bytes = File.ReadAllBytes(fullPath);
+            Debug.Log("Load the mesh successfully from >> " + fullPath);
+            return MeshSerializer.ReadMesh(bytes);
+        }
+        return null;
+    }
+
+    private void ReviseIndex()
+    {
+        Vector3 center = (points[0] + points[1] + points[2] + points[3]) / 4;
+        Vector3[] lines = new Vector3[72];
+        for (int i = 0; i < 72; i++)
+            lines[i] = new Vector3(Mathf.Cos(i * Mathf.PI / 36), 0, Mathf.Sin(i * Mathf.PI / 36));
+
+        int[] max = { 0, 0, 0, 0 };
+        float[,] innerProduct = new float[72, 4];
+
+        for (int i = 0; i < 72; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                innerProduct[i, j] = (points[j].x - center.x) * lines[i].x + (points[j].z - center.z) * lines[i].z;
+                if (innerProduct[max[j], j] < innerProduct[i, j]) max[j] = i;
+            }
+        }
+
+        Dictionary<int, int> sort = new Dictionary<int, int>();
+        sort.Add(max[0], 0); sort.Add(max[1], 1); sort.Add(max[2], 2); sort.Add(max[3], 3);
+        
+        Array.Sort(max);
+        Array.Reverse(max);
+        Vector3[] tempPoints = new Vector3[4];
+        for (int i = 0; i < 4; i++) tempPoints[i] = points[sort[max[i]]];
+        for (int i = 0; i < 4; i++) points[i] = tempPoints[i];
+    }
+
 }

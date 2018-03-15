@@ -1,16 +1,12 @@
-﻿using System.Collections;
+﻿/*
+ * 클릭하면 Popup 하는 메뉴들을 정의한다.
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupMenu : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public GameObject ObjectToControl;
+
 }

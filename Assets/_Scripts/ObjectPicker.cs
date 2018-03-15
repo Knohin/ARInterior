@@ -1,17 +1,15 @@
-﻿using System.Collections;
+﻿/*
+ * 클릭(혹은 터치) 를 이용해 Pickable객체를 선택한다.
+ * 선택된 Pickable객체는 등록되있는 PopupMenu를 띄운다.
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class ObjectPicker : MonoBehaviour {
 
-    public Pickable PickedObject;
-
-    private void Awake()
-    {
-        this.tag = "MainCamera";
-    }
-    
+    public Pickable PickableObject;
 
     private void Update()
     {
@@ -39,11 +37,11 @@ public class ObjectPicker : MonoBehaviour {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                PickedObject = hit.transform.GetComponent<Pickable>();
-                if(PickedObject != null)
+                PickableObject = hit.transform.GetComponent<Pickable>();
+                if(PickableObject != null)
                 {
-                    PickedObject.popupMenu.gameObject.SetActive(true);
-                    PickedObject.popupMenu.transform.position = hit.point - ray.direction * 0.4f;
+                    PickableObject.popupMenu.transform.position = hit.point - ray.direction * 0.4f;
+                    PickableObject.popupMenu.gameObject.SetActive(true);
                 }
             }
         }
