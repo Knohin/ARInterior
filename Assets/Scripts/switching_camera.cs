@@ -8,7 +8,7 @@ public class switching_camera : MonoBehaviour {
     int s_w, s_h;
     public Camera caAr;     //AR camera
     public Camera ca;       //main camera
-
+    
     public GameObject masterGO;
     public GameObject dupmasterGO;
     public Component[] GOarr;
@@ -111,7 +111,8 @@ public class switching_camera : MonoBehaviour {
             testtext2.text = originGO.Length.ToString();
             foreach (GameObject tempGO in originGO)
             {
-                if (tempGO.transform.name.Equals("3dMasterPlane"))
+                
+                if (tempGO.transform.name.Equals("tempP"))
                 {
                     dupmasterGO = originGO[masterPindex];
                 }
