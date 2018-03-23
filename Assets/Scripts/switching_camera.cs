@@ -36,8 +36,6 @@ public class switching_camera : MonoBehaviour {
         s_w = Screen.width;
         s_h = Screen.height;
         //        GameObject.Find("3dCanvas").GetComponent<Canvas>();
-        //3d, ar에 따라 줌인아웃 가능하도록 구현
-        //canvas 해당 화면 비율 맞도록, 가로, 세로 돌릴시 자동 위치 잡도록 anchar?달것
     }
 
     public void ButtonClick()
@@ -111,8 +109,7 @@ public class switching_camera : MonoBehaviour {
             testtext2.text = originGO.Length.ToString();
             foreach (GameObject tempGO in originGO)
             {
-                
-                if (tempGO.transform.name.Equals("tempP"))
+                if (tempGO.transform.name.Equals("3dMasterPlane"))
                 {
                     dupmasterGO = originGO[masterPindex];
                 }
@@ -131,7 +128,7 @@ public class switching_camera : MonoBehaviour {
             //testtext2.text = masterPindex.ToString();
             //foreach (var tempGO in GOarr)
             //{
-                //make new gameobject
+            //make new gameobject
                 Vector3 s = mergelocation(GOarr[0].transform.localPosition, dupmasterGO.transform.position);
                 tempdGO = Instantiate(GameObject.Find(GOarr[0].transform.name), s, GOarr[0].transform.localRotation);
                 tempdGO.transform.localScale = new Vector3(100, 100, 100);

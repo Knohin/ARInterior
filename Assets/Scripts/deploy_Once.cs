@@ -6,9 +6,10 @@ public class deploy_Once : MonoBehaviour
 {
 
     public GameObject AnchorStage;
+    public GameObject MasterPlane;
     private PositionalDeviceTracker _deviceTracker;
     private GameObject _previousAnchor;
-
+    
     public void Start()
     {
         if (AnchorStage == null)
@@ -18,6 +19,7 @@ public class deploy_Once : MonoBehaviour
         }
 
         AnchorStage.SetActive(false);
+        MasterPlane.SetActive(false);
     }
 
     public void Awake()
@@ -51,6 +53,11 @@ public class deploy_Once : MonoBehaviour
             AnchorStage.transform.localPosition = Vector3.zero;
             AnchorStage.transform.localRotation = Quaternion.identity;
             AnchorStage.SetActive(true);
+
+            //MasterPlane.transform.parent = anchor.transform;
+            MasterPlane.transform.localPosition = AnchorStage.transform.position;
+            MasterPlane.transform.localRotation = AnchorStage.transform.localRotation;
+            MasterPlane.SetActive(true);
         }
 
         if (_previousAnchor != null)
@@ -60,4 +67,10 @@ public class deploy_Once : MonoBehaviour
 
         _previousAnchor = anchor;
     }
+
+    public void PerformHitTestToScreenCenter()
+    {
+        GetComponent<PlaneFinderBehaviour>().PerformHitTest(new Vector2(Screen.width / 2, Screen.height / 2));
+    }
+
 }

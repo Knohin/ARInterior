@@ -92,7 +92,13 @@ public class zoom : MonoBehaviour {
         else if (O_scale <= 10 && TouchData <= 0)
             return 0.0f;
 
-        for (tempN = 10000.0f; tempN > 1; tempN/=10.0f)
+        //if maxsize
+        if (O_scale >= 1000 && TouchData > 0)
+            return 0.0f;
+        else if (O_scale >= 1000 && TouchData <= 0)
+            return -100.0f;
+
+        for (tempN = 1000.0f; tempN > 1; tempN/=10.0f)
         {
             if (O_scale / tempN >= 1)
             {
