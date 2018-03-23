@@ -15,17 +15,22 @@ using UnityEngine;
 
 public class WallBuilder : MonoBehaviour {
 
-    // 나중에 private으로
-    public int touchCount;
-    public Vector3[] points;
+    public GameObject MarkPrefab;
+
+    private int touchCount;
+    private Vector3[] points;
+    private Transform markAtCornerTr;
+    private GameObject wall;
+
+    private Mesh MeshToSave;
 
     private void Start()
     {
-        touchCount = 0;
-        points = new Vector3[4];
+        markAtCornerTr = Instantiate(MarkPrefab, Vector3.zero, MarkPrefab.transform.rotation).transform;
+        Initialize();
     }
 
-    private void Update()
+    private void Update_old()
     {
         Vector2 pos;
 #if UNITY_EDITOR
@@ -56,27 +61,50 @@ public class WallBuilder : MonoBehaviour {
             }
         }
     }
-
-    private void MakeSphere(Vector3 pos)
+    private void Update()
     {
-        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        sphere.transform.position = pos;
-        sphere.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        //sphere.GetComponent<MeshRenderer>().material.color = new Color(1f, 1f, 1f, 0.3f); // 안먹네. 머티리얼을 새로 만들어야할듯
-        Destroy(sphere.GetComponent<Collider>());
+        Vector2 centerOfScreen = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = Camera.main.ScreenPointToRay(centerOfScreen);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            markAtCornerTr.position = hit.point;
+#if UNITY_EDITOR
+            if (Input.GetMouseButtonDown(0))
+#else
+            if (0 < Input.touchCount
+                && Input.GetTouch(0).phase == TouchPhase.Began)
+#endif
+            {
+                //MakeSphere(hit.point);
+                SetCornerMark(hit.point);
+                points[touchCount] = hit.point;
+
+                touchCount++;
+                if (touchCount == 4)
+                {
+                    ReviseIndex();
+                    BuildWall();
+                    Initialize();
+                }
+            }
+        }
+
     }
+
 
     private void BuildWall()
     {
         const float Height = 1.0f;
         Vector3 HeightVector = Vector3.up * Height;
         const float Thickness = 0.1f;
-        GameObject obj = new GameObject("Wall");
-        MeshFilter mf = obj.AddComponent<MeshFilter>();
-        MeshRenderer mr = obj.AddComponent<MeshRenderer>();
+        wall = new GameObject("Wall");
+        MeshFilter mf = wall.AddComponent<MeshFilter>();
+        MeshRenderer mr = wall.AddComponent<MeshRenderer>();
 
-        Mesh newMesh = new Mesh();
-        mf.mesh = newMesh;
+        MeshToSave = new Mesh();
+        mf.mesh = MeshToSave;
 
         // 내부 벽
         List<Vector3> vertices = new List<Vector3>();
@@ -154,10 +182,10 @@ public class WallBuilder : MonoBehaviour {
             outWallPoints[3]+HeightVector
         });
 
-        newMesh.SetVertices(vertices);
-        newMesh.SetNormals(normals);
+        MeshToSave.SetVertices(vertices);
+        MeshToSave.SetNormals(normals);
 
-        newMesh.triangles = new int[] {
+        MeshToSave.triangles = new int[] {
             // 내부 벽
             //01 23
             0,1,3,     
@@ -191,30 +219,55 @@ public class WallBuilder : MonoBehaviour {
             35,36,32
         };
 
-        newMesh.RecalculateBounds();
+        MeshToSave.RecalculateBounds();
         //newMesh.RecalculateNormals();
         //newMesh.RecalculateTangents();
 
 
         mr.material = new Material(Shader.Find("Standard"));
-        //SaveMeshToPath(newMesh, "testmesh");
-        //mf.mesh = LoadMeshFromPath("testmesh");
+
+        //SaveMeshToPath(MeshToSave, "testmesh");
+
+        // Remove Child Object
+        for (int i = 0; i < transform.childCount; ++i)
+            Destroy(transform.GetChild(i).gameObject);
     }
 
-    private void LoadWall(string filename="testmesh")
+    public void Initialize()
     {
-        GameObject obj = new GameObject("LoadedWall");
+        touchCount = 0;
+        points = new Vector3[4];
+        MeshToSave = null;
+    }
+    public void Cancle()
+    {
+        Initialize();
+        if (wall != null)
+        {
+            Destroy(wall);
+            wall = null;
+        }
+    }
+    public void SaveWall(string fileNameToSave = "testmesh")
+    {
+        SaveMeshToPath(MeshToSave, fileNameToSave);
+    }
+    public GameObject LoadWall(string newWallName = "LoadedWall", string fileNameToLoad="testmesh")
+    {
+        GameObject obj = new GameObject(newWallName);
         MeshFilter mf = obj.AddComponent<MeshFilter>();
         MeshRenderer mr = obj.AddComponent<MeshRenderer>();
 
         Mesh newMesh = new Mesh();
 
-        newMesh = LoadMeshFromPath(filename);
+        newMesh = LoadMeshFromPath(fileNameToLoad);
 
         newMesh.RecalculateBounds();
 
         mf.mesh = newMesh;
         mr.material = new Material(Shader.Find("Standard"));
+
+        return obj;
     }
 
     private void SaveMeshToPath(Mesh mesh, string path)
@@ -229,7 +282,6 @@ public class WallBuilder : MonoBehaviour {
         if (File.Exists(fullPath) == true)
         {
             byte[] bytes = File.ReadAllBytes(fullPath);
-            Debug.Log("Load the mesh successfully from >> " + fullPath);
             return MeshSerializer.ReadMesh(bytes);
         }
         return null;
@@ -263,5 +315,21 @@ public class WallBuilder : MonoBehaviour {
         for (int i = 0; i < 4; i++) tempPoints[i] = points[sort[max[i]]];
         for (int i = 0; i < 4; i++) points[i] = tempPoints[i];
     }
+    private GameObject MakeSphere(Vector3 pos)
+    {
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        sphere.transform.position = pos;
+        sphere.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        //sphere.GetComponent<MeshRenderer>().material.color = new Color(1f, 1f, 1f, 0.3f); // 안먹네. 머티리얼을 새로 만들어야할듯
+        Destroy(sphere.GetComponent<Collider>());
 
+        return sphere;
+    }
+    private GameObject SetCornerMark(Vector3 pos)
+    {
+        GameObject mark = Instantiate(MarkPrefab, pos, MarkPrefab.transform.rotation);
+        mark.transform.SetParent(this.transform);
+
+        return mark;
+    }
 }

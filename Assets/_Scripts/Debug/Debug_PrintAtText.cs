@@ -8,17 +8,24 @@ using UnityEngine.UI;
 
 public class Debug_PrintAtText : MonoBehaviour {
 
-    public Text DebugText;
+    public GameObject ARCamera;
+    public GameObject ImageTarget;
+
+    private Text DebugText;
 
     private void Start()
     {
+        DebugText = GetComponent<Text>();
         if (DebugText == null)
             Debug.LogError("DebugText(Text) is null !!");
     }
 
     void Update () {
-        string str = "Position : " + transform.position.ToString();
-        str += "\nRotation : " + transform.rotation.eulerAngles.ToString();
+        string str = "";
+        str += "Position : " + ARCamera.transform.position.ToString();
+        str += "\nRotation : " + ARCamera.transform.rotation.eulerAngles.ToString();
+        str += "\nImageTarget Position : " + ImageTarget.transform.position.ToString();
+        str += "\nImageTarget Height : " + (ARCamera.transform.position.y - ImageTarget.transform.position.y).ToString();
         DebugText.text = str;
 	}
 }
