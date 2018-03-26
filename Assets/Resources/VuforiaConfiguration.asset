@@ -8,16 +8,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2067402452, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
+  m_Script: {fileID: -2067402452, guid: 1e108ae5f2133934f948edded555f03e, type: 3}
   m_Name: VuforiaConfiguration
   m_EditorClassIdentifier: 
   vuforia:
-    vuforiaLicenseKey: AXkpCI3/////AAAAmYUDzu++1UyFsgwTLfH4RZsHyCdmZ/AFFVBdPOnamQhxhrgvKc40T0r1TTQv3F5kDwrtu7yvZ/lTkwRzIabgqIyBxg6hs+cdXxieR8UtzTx7cF3+fJF8JfLqF3zKZLjY0hDFIaFkYndT2ETW1GEfhulI0BYBeD0OABmsU5qyj86dw+ADAxX4kp6WXqGSIc8VGBS9b5EJ4UivBQqyCQRHbpNVSSwSGrlLvb8SB7diDMg98OSyU2Yx6alEtYsGkScMLNMTZy7WmOTtG3LFzTU7h2usawl+qFZkABb5YmWzexBg2if/jIvihmVvhbhemIWI019miTTvtl2A3FZeOiW8zd2S1PCm7yqana9fszKJsTb/
-    ufoLicenseKey: QVZUUjkyci8vLy8vQUFBQUtQeTJDajFuREVOUWdTY2poM2lSNjNvcjhDOTlBZDVYQkd4bmk0WjhWQXh1SkpaNGZaQWtZQUpVYjcwcHBPVzRsWHZna0RoNVNZeHVhVERPNnhDS3dWUEJMWFFIcnBhZ0xIYnZUczUzb3hUeG1Eb1BjS2tGZU5xWWNnZ292Ylc4N0lNajYwdDFYajQ3Z3lrTE1OeUVDREprTE5PYUFKdUFkRnhNaWhNSHo1M1FvUWpkTFBXT2pma3NxNU1laXBzSVErTzFVYktlc285WGcvRnR3UnZIbWxVbVBOYndWcElLeWg2ODVNZ0JEYXVWQmlpMndSdnNFQ3hrWnJMNkZlcEhMOEhRMEx4UVlpaXZTSGMvTURvUktENzJvVzAwS2lwK2lpeUFuZXFlcnprcWxiUzZQY2ZLdG4rYWdvaEV0VDZGNnh1UzVyS1VFNlNEdDVCT3ZIVGNnRmNNdVNaWFB6bDgyQ1Z5cTBidnFXSEc=
+    vuforiaLicenseKey: ATEWtyD/////AAAAmdDvLfVkmE/Huz2I3T7pRlJQ9OHjBrI3y/3pAtxmZ6AmPIfBeQvLg4jCXeR7VcCE785bZJjSqz6GEn8LZzxqUHRDDUP3D6MJjlCT3MVEMYIV68iNsp7R61pLToC00NgdSTGPNpSLpBhshbIqHxhxMoxbvpJ7wGvv221xOTfRMj1inMxhGldGO8TKsuYWRKcdHUxsl4iwAR+NzcQQKUIIEYv9ADclGU1mMEZ3TgfwNRs3gyOqrQHvuycnkwLr0Is01FVjXx4J9JzAn3yZefDqR7sf8g55fjhEcouzK9xFjIqCo0D4dok3Z5X2tY0QgekBBdXI7qabkBnrKSWIUplb46q/3b6ocpbSfMuzyQMP/Fsy
+    ufoLicenseKey: QWVRRWZmRC8vLy8vQUFBQUtJcGxUdktQYkVTUnNnTzRlTEhaeFNkNko2NHRPRmV5K0hQOWtZTFdxUFZzVXkvUE9ocUhjVmJUbEZVSE5NYWt0eXJ2ZGFCSnJkVVBMVmZFUk5tcDZ1R0NQaWpwbGhCKy9mVWlnS3pSdHpJQlVOczRCVmRTL0NabjJsVk4vdGlLa2oxOWhqS3pqcnk2RE1XUVhsak1MS0VhREY4ckpoZXhPTDFWZWxWNm9xV0l2UlZwTmYybHFCanQ3c1Y0VktLWU5mWnZQcDVEVVRIU3AxN00wTmVqZzJOYTN6UVc0cHdYRjNGaEhTNTE0OWlaaHVnZ283d0x6eFo0N0krREorTzY5NjA4WnE2dEZ3MkpqQStMaGJ2NzRsaXU3Z01ZZG9qTmRPR0Z4OWdYZ09ZanlHU1Q2NVpjUU10ekV3TWVmRHhldVRIKzZqMGJxQjNneFFCUllpRVVXajJpQjFpVGpUbjA1WDlZZzZ3SGU0UjM=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 15
-    maxSimultaneousObjectTargets: 1
+    maxSimultaneousImageTargets: 11
+    maxSimultaneousObjectTargets: 11
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
@@ -27,8 +27,8 @@ MonoBehaviour:
     eyewearType: 0
     stereoFramework: 0
     seeThroughConfiguration: 0
-    viewerName: Generic Cardboard
-    viewerManufacturer: Vuforia
+    viewerName: 
+    viewerManufacturer: 
     useCustomViewer: 0
     customViewer:
       Version: 0
@@ -45,10 +45,8 @@ MonoBehaviour:
   databaseLoad:
     dataSetsToLoad:
     - BlueprintSimulation
-    - VuforiaTest_DB
     dataSetsToActivate:
     - BlueprintSimulation
-    - VuforiaTest_DB
   videoBackground:
     clippingMode: 0
     numDivisions: 2
@@ -57,9 +55,9 @@ MonoBehaviour:
     matteShader: {fileID: 15310, guid: 0000000000000000f000000000000000, type: 0}
     videoBackgroundEnabled: 1
   deviceTracker:
-    autoInitTracker: 1
-    autoStartTracker: 1
-    trackingMode: 1
+    autoInitTracker: 0
+    autoStartTracker: 0
+    trackingMode: 0
     posePrediction: 0
     modelCorrectionMode: 0
     modelTransformEnabled: 0
@@ -68,7 +66,7 @@ MonoBehaviour:
     autoInitTracker: 0
     autoStartTracker: 0
   webcam:
-    deviceNameSetInEditor: DroidCam Source 3
+    deviceNameSetInEditor: ATIV Real HD Camera
     flipHorizontally: 0
     turnOffWebCam: 1
     renderTextureLayer: 30
