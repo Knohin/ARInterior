@@ -17,20 +17,33 @@ public class SerializedObject :MonoBehaviour
     {
         sd.save(gameObject);
     }
+
+    public void SetSdToObject() // 바뀔 수 있는 상태
+    {
+        gameObject.name = sd.mFurniture;
+        gameObject.transform.position = sd.mPosition;
+        gameObject.transform.rotation = sd.mRotation;
+        gameObject.transform.localScale = sd.mScale;
+        gameObject.GetComponent<changeColor>().Start();
+        gameObject.GetComponent<changeColor>().SetColor(sd.mColor);           
+        
+        if (gameObject.GetComponent<MeshFilter>() != null)
+        {
+            gameObject.GetComponent<MeshFilter>().mesh = MeshSerializer.ReadMesh(sd.mesh);
+        }
+    }
 }
 
 [System.Serializable]
 public class SerializedData
 {
-    // 가구 정보
+    // 가구 & 벽 정보
     public string mFurniture;
     public Vector3 mPosition;
     public Quaternion mRotation;
     public Vector3 mScale;
     public int mColor;
-    
-    // 벽 정보
-
+    public byte[] mesh;
 
     public void save(GameObject go) // 바뀔 수 있는 상태
     {
@@ -38,10 +51,17 @@ public class SerializedData
         mPosition = go.transform.position;
         mRotation = go.transform.rotation;
         mScale = go.transform.localScale;
-        //mColor = go.GetComponent<MeshRenderer>().material.color;
+        mColor = go.GetComponent<changeColor>().GetColor();
+
+        if(go.GetComponent<MeshFilter>() != null)
+        {
+            Mesh m = go.GetComponent<MeshFilter>().mesh;
+            mesh = MeshSerializer.WriteMesh(m, true);
+        }
     }
 }
 
+// json 배열화 저장
 public static class JsonHelper
 {
     public static T[] FromJson<T>(string json)

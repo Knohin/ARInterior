@@ -99,6 +99,53 @@ public class MeshSerializer
 
         return mesh;
     }
+    // Writes mesh to an array of bytes.
+    public static byte[] WriteMesh(Mesh mesh, bool saveTangents)
+    {
+        if (!mesh)
+            throw new Exception("No mesh given!");
+
+        var verts = mesh.vertices;
+        var normals = mesh.normals;
+        var tangents = mesh.tangents;
+        var uvs = mesh.uv;
+        var tris = mesh.triangles;
+
+        // figure out vertex format
+        byte format = 1;
+        if (normals.Length > 0)
+            format |= 2;
+        if (saveTangents && tangents.Length > 0)
+            format |= 4;
+        if (uvs.Length > 0)
+            format |= 8;
+
+        var stream = new MemoryStream();
+        var buf = new BinaryWriter(stream);
+
+        // write header
+        var vertCount = (ushort)verts.Length;
+        var triCount = (ushort)(tris.Length / 3);
+        buf.Write(vertCount);
+        buf.Write(triCount);
+        buf.Write(format);
+        // vertex components
+        WriteVector3Array16Bit(verts, buf);
+        WriteVector3ArrayBytes(normals, buf);
+        if (saveTangents)
+            WriteVector4ArrayBytes(tangents, buf);
+        WriteVector2Array16Bit(uvs, buf);
+        // triangle indices
+        foreach (var idx in tris)
+        {
+            var idx16 = (ushort)idx;
+            buf.Write(idx16);
+        }
+        buf.Close();
+
+        return stream.ToArray();
+    }
+    
 
     static void ReadVector3Array16Bit(Vector3[] arr, BinaryReader buf)
     {
@@ -282,50 +329,4 @@ public class MeshSerializer
         }
     }
 
-    // Writes mesh to an array of bytes.
-    public static byte[] WriteMesh(Mesh mesh, bool saveTangents)
-    {
-        if (!mesh)
-            throw new Exception("No mesh given!");
-
-        var verts = mesh.vertices;
-        var normals = mesh.normals;
-        var tangents = mesh.tangents;
-        var uvs = mesh.uv;
-        var tris = mesh.triangles;
-
-        // figure out vertex format
-        byte format = 1;
-        if (normals.Length > 0)
-            format |= 2;
-        if (saveTangents && tangents.Length > 0)
-            format |= 4;
-        if (uvs.Length > 0)
-            format |= 8;
-
-        var stream = new MemoryStream();
-        var buf = new BinaryWriter(stream);
-
-        // write header
-        var vertCount = (ushort)verts.Length;
-        var triCount = (ushort)(tris.Length / 3);
-        buf.Write(vertCount);
-        buf.Write(triCount);
-        buf.Write(format);
-        // vertex components
-        WriteVector3Array16Bit(verts, buf);
-        WriteVector3ArrayBytes(normals, buf);
-        if (saveTangents)
-            WriteVector4ArrayBytes(tangents, buf);
-        WriteVector2Array16Bit(uvs, buf);
-        // triangle indices
-        foreach (var idx in tris)
-        {
-            var idx16 = (ushort)idx;
-            buf.Write(idx16);
-        }
-        buf.Close();
-
-        return stream.ToArray();
-    }
 }

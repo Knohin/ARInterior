@@ -73,7 +73,7 @@ public class JsonManager : MonoBehaviour
     }
 
     public void LoadObjectFromJson()
-    {
+    {        
         string filename = "data.json";
         string path = pathForDocumentsFile(filename);
 
@@ -91,85 +91,68 @@ public class JsonManager : MonoBehaviour
             TextFieldToPrint2.text = str;
 
             SerializedData ObjectToLoad = JsonUtility.FromJson<SerializedData>(str);
-
-            //Debug.Log(ObjectToLoad.mFurniture);
+            
+            Debug.Log(ObjectToLoad.ToString());
 
             string name = ObjectToLoad.mFurniture.Trim();
-            name = name.Substring(0, name.IndexOf("(") - 1);
+
+            if (name.IndexOf("(") == 1)
+            {
+                name = name.Substring(0, name.IndexOf("(") - 1);
+            }
 
             //Debug.Log(name);
-
+            GameObject madeObject = new GameObject();
             switch (name)
             {
-                case "Cube":
-                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    setFurniture(cube, ObjectToLoad);
+                case "Wall":
+                    madeObject = new GameObject("Wall");
+                    MeshFilter mf = madeObject.AddComponent<MeshFilter>();
+                    MeshRenderer mr = madeObject.AddComponent<MeshRenderer>();
+                    madeObject.AddComponent<SerializedObject> ();
+                    
+                    mr.material = new Material(Shader.Find("Standard"));
                     break;
-                case "Sphere":
-                    GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    setFurniture(sphere, ObjectToLoad);
-                    break;
-                case "Capsule":
-                    GameObject capsule = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-                    setFurniture(capsule, ObjectToLoad);
-                    break;
+
                 case "bed":
-                    GameObject.Instantiate(bed);
-                    setFurniture(bed, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(bed);
                     break;
                 case "bookshelf":
-                    GameObject.Instantiate(bookshelf);
-                    setFurniture(bookshelf, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(bookshelf);
                     break;
                 case "desk":
-                    GameObject.Instantiate(desk);
-                    setFurniture(desk, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(desk);
                     break;
                 case "gasrange":
-                    GameObject.Instantiate(gasrange);
-                    setFurniture(gasrange, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(gasrange);
                     break;
                 case "oven":
-                    GameObject.Instantiate(oven);
-                    setFurniture(oven, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(oven);
                     break;
                 case "refrigertor":
-                    GameObject.Instantiate(refrigertor);
-                    setFurniture(refrigertor, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(refrigertor);
                     break;
                 case "sink":
-                    GameObject.Instantiate(sink);
-                    setFurniture(sink, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(sink);
                     break;
                 case "sofa":
-                    GameObject.Instantiate(sofa);
-                    setFurniture(sofa, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(sofa);
                     break;
                 case "table":
-                    GameObject.Instantiate(table);
-                    setFurniture(table, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(table);
                     break;
                 case "television":
-                    GameObject.Instantiate(television);
-                    setFurniture(television, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(television);
                     break;
                 case "wardrobe":
-                    GameObject.Instantiate(wardrobe);
-                    setFurniture(wardrobe, ObjectToLoad);
+                    madeObject = GameObject.Instantiate(wardrobe);
                     break;
             }
+            madeObject.GetComponent<SerializedObject>().sd = ObjectToLoad;
+            madeObject.GetComponent<SerializedObject>().SetSdToObject();
         }
-
         else
         {
         }
-    }
-
-    public void setFurniture(GameObject furniture, SerializedData ObjectToLoad)
-    {
-        furniture.transform.position = ObjectToLoad.mPosition;
-        furniture.transform.rotation = ObjectToLoad.mRotation;
-        furniture.transform.localScale = ObjectToLoad.mScale; 
-        //furniture.GetComponent<MeshRenderer>().material.color = ObjectToLoad.mColor;
     }
 }
