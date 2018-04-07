@@ -17,7 +17,7 @@ MonoBehaviour:
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
     maxSimultaneousImageTargets: 11
-    maxSimultaneousObjectTargets: 11
+    maxSimultaneousObjectTargets: 0
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
@@ -68,5 +68,5 @@ MonoBehaviour:
   webcam:
     deviceNameSetInEditor: ATIV Real HD Camera
     flipHorizontally: 0
-    turnOffWebCam: 1
+    turnOffWebCam: 0
     renderTextureLayer: 30

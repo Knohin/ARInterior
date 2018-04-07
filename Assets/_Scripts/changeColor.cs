@@ -28,9 +28,7 @@ public class changeColor : MonoBehaviour {
 
     public void Change() {
         if (gameObject.name == "bed")
-        {
-            Debug.Log(transform.Find("blanket").GetComponent<MeshRenderer>().material);
-            
+        {           
             transform.Find("blanket").GetComponent<MeshRenderer>().material = colors[colorState];
         }
         else if (gameObject.name == "desk") {
