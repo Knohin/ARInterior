@@ -5,20 +5,18 @@ using UnityEngine;
 
 public class SerializedObject :MonoBehaviour
 {
-    public SerializedData sd;
+    public SerializedData sd; // MonoBehaviour 은 Serializable되지 않는다
     private void Start()
     {
-        //SetCurrentState();
         sd = new SerializedData();
-        SetCurrentState();
     }
     
-    public void SetCurrentState() // 바뀔 수 있는 상태
+    public void SetCurrentState() // 현재상태 불러오기
     {
         sd.save(gameObject);
     }
 
-    public void SetSdToObject() // 바뀔 수 있는 상태
+    public void SetSdToObject() // load한 데이터를 오브젝트에 넣음
     {
         gameObject.name = sd.mFurniture;
         gameObject.transform.position = sd.mPosition;
@@ -45,7 +43,7 @@ public class SerializedData
     public int mColor;
     public byte[] mesh;
 
-    public void save(GameObject go) // 바뀔 수 있는 상태
+    public void save(GameObject go) // save 할 상태
     {
         mFurniture = go.name;
         mPosition = go.transform.position;

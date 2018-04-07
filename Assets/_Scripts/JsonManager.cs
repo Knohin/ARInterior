@@ -53,7 +53,7 @@ public class JsonManager : MonoBehaviour
         }
     }
 
-    // json을 통핸 오브젝트 저장
+    // json을 통한 오브젝트 저장
     public void SaveObjectInJson()
     {
         // trackable한(인식되는) 가구들
@@ -64,13 +64,14 @@ public class JsonManager : MonoBehaviour
         foreach(var t in trackable)
         {            
             ObjectToSave = t.gameObject.GetComponentInChildren<SerializedObject>().gameObject;
-            
+            Debug.Log(ObjectToSave.transform.position);
             if (ObjectToSave.GetComponent<SerializedObject>().sd == null)
             {
                 Debug.LogError("Object can't save");
                 return;
             }
-
+            // list에 넣기 전 현상태 불러오기
+            ObjectToSave.GetComponent<SerializedObject>().SetCurrentState();
             list.Add(ObjectToSave.GetComponent<SerializedObject>().sd);
         }
         // 배열의 내용을 json형식 string으로 저장
@@ -81,7 +82,8 @@ public class JsonManager : MonoBehaviour
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/Resources");
         }
-        // 전체 파일 경로, ""안의 이름으로 파일 저장
+        // 전체 파일 경로, ("")안의 이름으로 파일 저장
+        // TODO : 파일 이름을 사용자가 설정해서 저장시켜야 함
         string path = pathForDocumentsFile("data.json");
         FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write);
         StreamWriter sw = new StreamWriter(file);
@@ -91,12 +93,14 @@ public class JsonManager : MonoBehaviour
     }
 
     public void LoadObjectFromJson()
-    {        
+    {
+        // TODO : 파일 이름을 저장소 내부의 파일 이름으로 가져와야 함
         string filename = "data.json";
         string path = pathForDocumentsFile(filename);
 
         if (File.Exists(path))
         {
+            // 파일로 부터 string으로 된 json을 가져온다.
             FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(file);
 
@@ -106,8 +110,8 @@ public class JsonManager : MonoBehaviour
             sr.Close();
             file.Close();
             
-            TextFieldToPrint2.text = json;
-
+            TextFieldToPrint2.text = json; // 구현이 끝나면 삭제
+            // 데이터 배열로 deserialize 하여 그 정보로 오브젝트 생성
             SerializedData[] list = JsonHelper.FromJson<SerializedData>(json);
             foreach (var ObjectToLoad in list)
             {
@@ -119,7 +123,7 @@ public class JsonManager : MonoBehaviour
                 }
                 Debug.Log(name);
 
-                GameObject madeObject = new GameObject();
+                GameObject madeObject;
                 switch (name)
                 {
                     case "Wall":
@@ -127,10 +131,8 @@ public class JsonManager : MonoBehaviour
                         MeshFilter mf = madeObject.AddComponent<MeshFilter>();
                         MeshRenderer mr = madeObject.AddComponent<MeshRenderer>();
                         madeObject.AddComponent<SerializedObject>();
-
                         mr.material = new Material(Shader.Find("Standard"));
                         break;
-
                     case "bed":
                         madeObject = GameObject.Instantiate(bed);
                         break;
@@ -173,6 +175,10 @@ public class JsonManager : MonoBehaviour
                     case "wardrobe":
                         madeObject = GameObject.Instantiate(wardrobe);
                         break;
+                    default:
+                        madeObject = new GameObject("error");
+                        Debug.LogError("error");
+                        break;
                 }
 
                 madeObject.GetComponent<SerializedObject>().sd = ObjectToLoad;
@@ -181,10 +187,12 @@ public class JsonManager : MonoBehaviour
         }
         else
         {
+            Debug.LogError("없는 가구, 가구 추가 요망");
         }
     }
 }
 
+// JsonUtility 배열 지원용 Helper 클래스
 public static class JsonHelper
 {
     public static T[] FromJson<T>(string json)
@@ -213,25 +221,3 @@ public static class JsonHelper
         public T[] Items;
     }
 }
-
-// 저장 백업코드
-/*if (ObjectToSave.GetComponent<SerializedObject>().sd == null)
-{
-    Debug.LogError("Object can't save");
-    return;
-}
-
-string json = JsonUtility.ToJson((object)ObjectToSave.GetComponent<SerializedObject>().sd);
-TextFieldToPrint.text = json; // TextFieldToPrint의 텍스트를 바꾼다. 기능 구현하면 주석처리
-
-if (!Directory.Exists(Application.persistentDataPath + "/Resources"))
-{
-    Directory.CreateDirectory(Application.persistentDataPath + "/Resources");
-}
-
-string path = pathForDocumentsFile("data.json");
-FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write);
-StreamWriter sw = new StreamWriter(file);
-sw.WriteLine(json);
-sw.Close();
-file.Close();*/
