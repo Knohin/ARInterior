@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Vuforia;
+using UnityEngine.Events;
 
 public class DeployStageOnce : MonoBehaviour
 {
@@ -46,9 +47,14 @@ public class DeployStageOnce : MonoBehaviour
 
     public void OnInteractiveHitTest(HitTestResult result)
     {
-        if (result == null || AnchorStage == null)
+        if (result == null )
         {
-            Debug.LogWarning("Hit test is invalid or AnchorStage not set");
+            Debug.LogWarning("Hit test is invalid");
+            return;
+        }
+        if (AnchorStage == null)
+        {
+            Debug.LogWarning("AnchorStage not set");
             return;
         }
 
@@ -68,34 +74,8 @@ public class DeployStageOnce : MonoBehaviour
         }
 
         _previousAnchor = anchor;
+        Debug.Log("-------------------------------Hit Test Works");
     }
-
-    public void OnAutomaticHitText(HitTestResult result)
-    {
-        if (result == null || AnchorStage == null)
-        {
-            Debug.LogWarning("Hit test is invalid or AnchorStage not set");
-            return;
-        }
-        var anchor = _deviceTracker.CreatePlaneAnchor(Guid.NewGuid().ToString(), result);
-
-        if (anchor != null)
-        {
-            AnchorStage.transform.parent = anchor.transform;
-            AnchorStage.transform.localPosition = Vector3.zero;
-            AnchorStage.transform.localRotation = Quaternion.identity;
-            AnchorStage.SetActive(true);
-        }
-
-        if (_previousAnchor != null)
-        {
-            Destroy(_previousAnchor);
-        }
-
-        _previousAnchor = anchor;
-    }
-
-
 
     public void PerformHitTestToScreenCenter()
     {

@@ -10,6 +10,7 @@ public class Debug_PrintAtText : MonoBehaviour {
 
     public GameObject ARCamera;
     public GameObject ImageTarget;
+    public GameObject PlaneFinder;
 
     private Text DebugText;
 
@@ -26,6 +27,7 @@ public class Debug_PrintAtText : MonoBehaviour {
         str += "\nRotation : " + ARCamera.transform.rotation.eulerAngles.ToString();
         str += "\nImageTarget Position : " + ImageTarget.transform.position.ToString();
         str += "\nImageTarget Height : " + (ARCamera.transform.position.y - ImageTarget.transform.position.y).ToString();
+        str += 
         DebugText.text = str;
 	}
 }
