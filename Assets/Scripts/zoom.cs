@@ -64,7 +64,7 @@ public class zoom : MonoBehaviour {
                 {
                     tempf = CalScale(JudgeLargeScale(tempV.x, tempV.y, tempV.z), TouchData);
                     addingscale = new Vector3(tempf, tempf, tempf);
-                    tar.transform.localScale -= addingscale;
+                    tar.transform.localScale += addingscale;
                 }
             }
         }
@@ -86,19 +86,20 @@ public class zoom : MonoBehaviour {
     float CalScale(float O_scale, float TouchData)
     {
         float tempN;
+        
         //if minsize
-        if (O_scale <= 10 && TouchData > 0)
+        if (O_scale <= 1 && TouchData > 0)
             return 0.1f;
-        else if (O_scale <= 10 && TouchData <= 0)
+        else if (O_scale <= 1 && TouchData <= 0)
             return 0.0f;
-
+            
         //if maxsize
-        if (O_scale >= 1000 && TouchData > 0)
+        if (O_scale >= 10 && TouchData > 0)
             return 0.0f;
-        else if (O_scale >= 1000 && TouchData <= 0)
-            return -100.0f;
+        else if (O_scale >= 10 && TouchData <= 0)
+            return -0.1f;
 
-        for (tempN = 1000.0f; tempN > 1; tempN/=10.0f)
+        for (tempN = 10.0f; tempN > 1; tempN/=10.0f)
         {
             if (O_scale / tempN >= 1)
             {

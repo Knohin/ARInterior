@@ -7,6 +7,20 @@ using UnityEngine.EventSystems;
 
 //IPointerDownHandler, IPointerUpHandler -> for checking button pressed
 public class button_press : MonoBehaviour, IPointerDownHandler, IPointerUpHandler {
+
+    private static button_press _instance;
+    public static button_press Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<button_press>();
+            }
+            return _instance;
+        }
+    }
+
     enum buttonType
     {
         UP,
@@ -15,23 +29,28 @@ public class button_press : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
         RIGHT,
         BLANK
     };
-    buttonType button_type;
+    private buttonType button_type;
     bool button_state;
     float speed;
     public Camera mainCa;
     Image curimage;
     Sprite popSpr, pushSpr;
+
     void Start()
     {
         button_state = false;
+        button_type = buttonType.BLANK;
         speed = 2.0f;
         
         curimage = this.gameObject.GetComponent<Image>();
     }
+
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        //GameObject.Find("testtext2").GetComponent<Text>().text = this.button_type.ToString();
         //check button pressed
-         if (button_state)
+        if (button_state)
          {
             if (button_type == buttonType.UP)
             {
@@ -110,5 +129,6 @@ public class button_press : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         curimage.overrideSprite = popSpr;
         button_state = false;
+        button_type = buttonType.BLANK;
     }
 }

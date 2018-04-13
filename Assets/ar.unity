@@ -1035,7 +1035,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 240496673}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1199932, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1723,6 +1723,7 @@ RectTransform:
   - {fileID: 719717788}
   - {fileID: 824424138}
   - {fileID: 170375885}
+  - {fileID: 987524219}
   m_Father: {fileID: 224519693}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2277,7 +2278,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1174119906}
         m_MethodName: ButtonClick
         m_Mode: 1
         m_Arguments:
@@ -3015,6 +3016,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCa: {fileID: 1101433412}
+--- !u!1 &987524218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 987524219}
+  - component: {fileID: 987524221}
+  - component: {fileID: 987524220}
+  m_Layer: 5
+  m_Name: testtext3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &987524219
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987524218}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000049, y: 1.0000049, z: 1.0000049}
+  m_Children: []
+  m_Father: {fileID: 555384771}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 44, y: -120.9}
+  m_SizeDelta: {x: -82, y: -178}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &987524220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987524218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: text3
+--- !u!222 &987524221
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987524218}
 --- !u!1 &1030580066
 GameObject:
   m_ObjectHideFlags: 0
@@ -3212,8 +3287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9696884381172fa478e402f6381f6c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  caAr: {fileID: 1174119903}
-  ca: {fileID: 1101433412}
 --- !u!114 &1101433411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3243,7 +3316,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.05
   far clip plane: 10000
   field of view: 120
   orthographic: 0
@@ -3577,7 +3650,7 @@ GameObject:
   - component: {fileID: 1171907791}
   - component: {fileID: 1171907793}
   m_Layer: 0
-  m_Name: Ground Plane Stage
+  m_Name: Ground_Plane_Stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3636,6 +3709,7 @@ GameObject:
   - component: {fileID: 1174119900}
   - component: {fileID: 1174119906}
   - component: {fileID: 1174119905}
+  - component: {fileID: 1174119907}
   m_Layer: 0
   m_Name: ARCamera
   m_TagString: MainCamera
@@ -3755,6 +3829,17 @@ MonoBehaviour:
   bttext: {fileID: 683009829}
   testtext: {fileID: 824424136}
   testtext2: {fileID: 170375883}
+--- !u!114 &1174119907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1174119899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44dc1f411d053745be0f5e0102b0e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1235866007
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,7 +3927,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 10b4a18fecb76c848a30c9c7b7518cc9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4007,6 +4092,11 @@ Prefab:
       propertyPath: caAr
       value: 
       objectReference: {fileID: 1174119903}
+    - target: {fileID: 20707446103993874, guid: fb98a7489d329524dacb4ce7a669519a,
+        type: 2}
+      propertyPath: near clip plane
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb98a7489d329524dacb4ce7a669519a, type: 2}
   m_IsPrefabParent: 0
@@ -5311,7 +5401,7 @@ MonoBehaviour:
   perspectiveZoomSpeed: 0.5
   orthoZoomSpeed: 0.5
   ca: {fileID: 1101433412}
-  tar: {fileID: 240496673}
+  tar: {fileID: 155795530}
   mytext: {fileID: 824424136}
   mytext2: {fileID: 170375883}
 --- !u!1 &1873291373
@@ -5716,6 +5806,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnchorStage: {fileID: 1171907790}
   MasterPlane: {fileID: 155795530}
+  image_target: {fileID: 240496673}
+  mainCamera: {fileID: 1174119903}
+  ground: {fileID: 1171907790}
+  mytext: {fileID: 824424136}
+  mytext2: {fileID: 170375883}
+  mytext3: {fileID: 987524220}
 --- !u!114 &2078342033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5728,7 +5824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlaneIndicator: {fileID: 0}
-  Height: 2.2
+  Height: 1.4
   OnInteractiveHitTest:
     m_PersistentCalls:
       m_Calls:
@@ -5758,7 +5854,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2078342030}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1027344429, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 

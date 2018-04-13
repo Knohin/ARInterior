@@ -64,11 +64,11 @@ public class switching_camera : MonoBehaviour {
                 }
                 masterPindex++;
             }
-            testtext2.text = masterPindex.ToString();
+//            testtext2.text = masterPindex.ToString();
 
             //destory dupGO
             GOarr = dupmasterGO.GetComponentsInChildren<Component>(true);
-            testtext2.text = GOarr.Length.ToString();
+//            testtext2.text = GOarr.Length.ToString();
             foreach (Component tempGO in GOarr)
             {
                 //name으로 찾을 시 기존 원본까지 삭제 됨으로 다시 바꿀것.
@@ -106,7 +106,7 @@ public class switching_camera : MonoBehaviour {
 
             int masterPindex=0;
             //testtext.text = masterPindex.ToString();
-            testtext2.text = originGO.Length.ToString();
+            //testtext2.text = originGO.Length.ToString();
             foreach (GameObject tempGO in originGO)
             {
                 if (tempGO.transform.name.Equals("3dMasterPlane"))
@@ -129,7 +129,7 @@ public class switching_camera : MonoBehaviour {
             //foreach (var tempGO in GOarr)
             //{
             //make new gameobject
-                Vector3 s = mergelocation(GOarr[0].transform.localPosition, dupmasterGO.transform.position);
+                Vector3 s = mergelocation(GOarr[0].transform.localPosition + Vector3.up/10, dupmasterGO.transform.position);
                 tempdGO = Instantiate(GameObject.Find(GOarr[0].transform.name), s, GOarr[0].transform.localRotation);
                 tempdGO.transform.localScale = new Vector3(100, 100, 100);
                 //testtext.text = GOarr[2].name;

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class rotate_camera : MonoBehaviour {
 
@@ -40,7 +42,7 @@ public class rotate_camera : MonoBehaviour {
             return false;
         }
     }
-
+    
     //touch sensor
     void inputTouch(Vector3 touchPosition)
     {
@@ -76,6 +78,7 @@ public class rotate_camera : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
         if (checkGameState3d())
         {
             //touch sensor
@@ -84,6 +87,10 @@ public class rotate_camera : MonoBehaviour {
             //why need to 'for_loop'
             for (int i = 0; i < tCount; i++)
             {
+                //https://docs.unity3d.com/ScriptReference/EventSystems.EventSystem.IsPointerOverGameObject.html
+                //Check if finger or left mouse button is over a UI element
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    return;
                 if (Input.GetTouch(i).phase == TouchPhase.Began)
                 {
                     inputTouch(Input.GetTouch(i).position);
@@ -98,6 +105,8 @@ public class rotate_camera : MonoBehaviour {
                 }
             }
 
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
             if (Input.GetMouseButtonDown(0))
             {
                 inputTouch(Input.mousePosition);
