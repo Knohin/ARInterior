@@ -13,21 +13,27 @@ public class LoadMenu : MonoBehaviour {
     private int mSelectedFileIdx;
 
     private GraphicRaycaster gr;
+    private JsonManager jsonManager;
 
     private void Awake()
     {
         mContent = transform.GetComponentInChildren<VerticalLayoutGroup>().gameObject; //.Find("Scroll View").Find("Viewport").Find("Content").gameObject;
 
+        jsonManager = GameObject.Find("JsonManager").GetComponent<JsonManager>();
         gr = GetComponentInParent<GraphicRaycaster>();
 
-        if (mContent == null || gr == null)
-            Debug.LogError("Private member variable is null !!!");
+        if (mContent == null || gr == null || jsonManager == null)
+            Debug.LogError("Private member variable is null !!!fsiojf83");
     }
 
     private void OnEnable()
     {
         // Read File name
-        string[] mFilePaths = Directory.GetFiles(Application.persistentDataPath + "\\Resource");
+#if UNITY_EDITOR
+        string[] mFilePaths = Directory.GetFiles(Application.dataPath + "/Resources");
+#else
+        string[] mFilePaths = Directory.GetFiles(Application.persistentDataPath + "/Resources");
+#endif
         string[] fileNames = new string[mFilePaths.Length];
 
         int idx=0;
@@ -39,23 +45,14 @@ public class LoadMenu : MonoBehaviour {
             //    filename = filename.Remove(filename.IndexOf('.'));
             fileNames[idx++] = filename;
         }
-
+        
         // Set Children Content by read name
-        idx = 0;
-        foreach(var filename in fileNames)
+        foreach (var filename in fileNames)
         {
-            Text text;
-            if (idx++ == 0)
-            {
-                text = mContent.transform.GetChild(0).GetComponentInChildren<Text>();
-            }
-            else
-            {
-                GameObject go = Instantiate(mContent.transform.GetChild(0).gameObject);
-                go.transform.SetParent(mContent.transform);
-                text = go.GetComponentInChildren<Text>();
-            }
-            text.text = filename;
+            GameObject go = Instantiate(mContent.transform.GetChild(0).gameObject);
+            go.transform.SetParent(mContent.transform);
+            go.GetComponentInChildren<Text>().text = filename;
+            go.SetActive(true);
         }
     }
     private void OnDisable()
@@ -97,7 +94,8 @@ public class LoadMenu : MonoBehaviour {
     public void OnLoadButtonClicked()
     {
         string fileName = mContent.transform.GetChild(mSelectedFileIdx).GetComponentInChildren<Text>().text;
-        GameObject wall = WallBuilder.LoadWall(fileName);
+        //GameObject wall = WallBuilder.LoadWall(fileName);
+        jsonManager.LoadObjectFromJson(fileName);
 
         gameObject.SetActive(false);
     }

@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &158064021
 Transform:
   m_ObjectHideFlags: 0
@@ -862,15 +862,15 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: Marker-00
+  mTrackableName: Marker-00-gray
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: Vuforia/VuforiaTest_DB.xml
   mExtendedTracking: 1
   mAspectRatio: 1
   mImageTargetType: 0
-  mWidth: 1
-  mHeight: 1
+  mWidth: 10
+  mHeight: 10
 --- !u!4 &390413296
 Transform:
   m_ObjectHideFlags: 0
@@ -944,7 +944,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 94fb6fadcdedcef448a3b7aa95e7150f, type: 2}
+  - {fileID: 2100000, guid: a9267223436693a4bb8e35161a24f8ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1513,11 +1513,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4173088978647878, guid: 20f5bf924e47d34448f6d3da1f1a7455, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1969107711037254, guid: 20f5bf924e47d34448f6d3da1f1a7455, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4173088978647878, guid: 20f5bf924e47d34448f6d3da1f1a7455, type: 2}
       propertyPath: m_LocalScale.x
@@ -1540,7 +1540,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Marker-00Material
+  m_Name: Marker-00-grayMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -1553,7 +1553,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: bfe023528aef4c3db026c0fbb20eb15a, type: 3}
+        m_Texture: {fileID: 2800000, guid: c331907528bb415ebf8511c583dc4ee1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -1766,7 +1766,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: TableChairMaterial
+  m_Name: TableMaterial
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -1779,7 +1779,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 42cfab0b7dde495e8126e4d886dc560d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 78f8d555f5ac41d4ab61dc758cc9e2c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -2508,56 +2508,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
---- !u!1001 &1225619682
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -2.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4634731634526768, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1104005259162126, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1175576229395142, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4f061e22de2d1324694e63b51c496ff5, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1237799762
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,7 +2805,7 @@ Transform:
   m_Children:
   - {fileID: 1672526163}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1303053312
 MonoBehaviour:
@@ -2985,7 +2935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1343152007
 Transform:
   m_ObjectHideFlags: 0
@@ -3277,7 +3227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1491526379
 Transform:
   m_ObjectHideFlags: 0
@@ -4187,7 +4137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1836004980
 Transform:
   m_ObjectHideFlags: 0

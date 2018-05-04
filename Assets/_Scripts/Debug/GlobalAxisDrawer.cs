@@ -8,6 +8,11 @@ using UnityEngine;
 
 public class GlobalAxisDrawer : MonoBehaviour {
 
+    private void Start()
+    {
+        transform.position = Vector3.zero;
+    }
+
     private void Update ()
     {
         Vector3 pos = this.transform.position;

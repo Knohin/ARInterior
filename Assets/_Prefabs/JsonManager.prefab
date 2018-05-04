@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1193239681789194}
+  m_IsPrefabParent: 1
+--- !u!1 &1193239681789194
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4767473399798196}
+  - component: {fileID: 114837553399996634}
+  m_Layer: 0
+  m_Name: JsonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4767473399798196
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1193239681789194}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.030186415, y: 1.4751217, z: -0.15204787}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114837553399996634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1193239681789194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67daa44a0293947bd197aa716436ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bed: {fileID: 1974189900842122, guid: 9aceb4dd205be394f80f0f9a45dd5947, type: 2}
+  bookshelf: {fileID: 1743507870519364, guid: f950eb02ac2563f4eb13d0306768155c, type: 2}
+  desk: {fileID: 0}
+  deskChair: {fileID: 0}
+  gasrange: {fileID: 0}
+  lightStand: {fileID: 0}
+  oven: {fileID: 0}
+  refrigerator: {fileID: 0}
+  sink: {fileID: 0}
+  sofa: {fileID: 0}
+  table: {fileID: 0}
+  tableChair: {fileID: 0}
+  television: {fileID: 0}
+  wardrobe: {fileID: 0}

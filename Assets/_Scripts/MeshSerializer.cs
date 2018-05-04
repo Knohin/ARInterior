@@ -331,7 +331,7 @@ public class MeshSerializer
 
     public static void SaveMeshToPath(Mesh mesh, string path)
     {
-        string dirPath = Application.persistentDataPath + "\\Resource";
+        string dirPath = Application.persistentDataPath + "/Resource";
         if (!Directory.Exists(dirPath))
             Directory.CreateDirectory(dirPath);
 
@@ -341,7 +341,7 @@ public class MeshSerializer
     }
     public static Mesh LoadMeshFromPath(string path)
     {
-        string fullPath = Path.Combine(Application.persistentDataPath + "\\Resource", path);
+        string fullPath = Path.Combine(Application.persistentDataPath + "/Resource", path);
         if (!File.Exists(fullPath))
         {
             Debug.LogError("파일이 존재 안함 e12798124");

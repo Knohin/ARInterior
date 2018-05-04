@@ -19,11 +19,15 @@ public class WallBuilder : MonoBehaviour {
 
     public float Height = 1.0f;
     public float Thickness = 0.1f;
-    public static Texture WallTexture;
+    public Texture WallTexture;
+    [Space(10)]
+    public GameObject AnchorStage;
     [Space(10)]
     public Material GuideWallMaterial;
     public GameObject GuideMarkPrefab;
     public GameObject GuideGridPrefab;
+    [Space(10)]
+    public GameObject SandStorm;
     [Space(10)]
     public GameObject SaveMenu;
 
@@ -43,12 +47,14 @@ public class WallBuilder : MonoBehaviour {
             Debug.LogError("Check if any public member variable is null!");
         GuideMarkTr = Instantiate(GuideMarkPrefab, Vector3.zero, GuideMarkPrefab.transform.rotation).transform;
         GuideGrid = Instantiate(GuideGridPrefab, Vector3.zero, GuideGridPrefab.transform.rotation);
+        GuideMarkTr.parent = AnchorStage.transform;
+        GuideGrid.transform.parent = AnchorStage.transform;
 
         Initialize();
 
-        Debug.Log(Application.dataPath);
-        Debug.Log(Application.streamingAssetsPath);
-        Debug.Log(Application.persistentDataPath);
+        Debug.Log("dataPath : " + Application.dataPath);
+        Debug.Log("streamingAssetsPath : " + Application.streamingAssetsPath);
+        Debug.Log("persistentDataPath" + Application.persistentDataPath);
     }
 
     private void Update()
@@ -62,6 +68,7 @@ public class WallBuilder : MonoBehaviour {
             GuideMarkTr.position = hit.point;
             GuideGrid.transform.position = hit.point + Vector3.up*0.0001f;
             GuideGrid.GetComponent<MeshRenderer>().material.mainTextureOffset = new Vector2(hit.point.x, hit.point.z);
+            Debug.Log("GuideGrid Tr : " + GuideGrid.transform.position.ToString("N3"));
             UpdateGuideWall(hit.point);
 
 #if UNITY_EDITOR
@@ -84,7 +91,7 @@ public class WallBuilder : MonoBehaviour {
                 if (touchCount == 4)
                 {
                     ReviseIndex();
-                    BuildWall();
+                    //BuildWall();
                 }
             }
         }
@@ -202,8 +209,14 @@ public class WallBuilder : MonoBehaviour {
     {
         Vector3 HeightVector = Vector3.up * Height;
         wall = new GameObject("Wall");
+        GameObject interiorGroup = GameObject.Find("Interior Group");
+        if (interiorGroup == null)
+            interiorGroup = new GameObject("Interior Group");
+        wall.transform.parent = interiorGroup.transform;
+
         MeshFilter mf = wall.AddComponent<MeshFilter>();
         MeshRenderer mr = wall.AddComponent<MeshRenderer>();
+        wall.AddComponent<SerializedObject>();
 
         MeshToSave = new Mesh();
         mf.mesh = MeshToSave;
@@ -367,26 +380,44 @@ public class WallBuilder : MonoBehaviour {
     }
     IEnumerator AnimateWallRising()
     {
-        const float RunTime = 2.0f;
+        const float RunTime = 4.0f;
         float elapsedTime = 0.0f;
-        int[] indexOfLower = new int[] {0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30 };
-        int[] indexOfUpper = new int[] { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
+        int[] indexOfFloor = new int[] {0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30 };
+        int[] indexOfCeiling = new int[] { 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 32, 33, 34, 35, 36, 37, 38, 39 };
 
         Mesh mesh = wall.GetComponent<MeshFilter>().mesh;
         Vector3[] vertices = mesh.vertices;
         Vector2[] uvs = mesh.uv;
 
-        foreach (int i in indexOfLower)
+        foreach (int i in indexOfFloor)
             uvs[i] += Vector2.up * Height;
-        foreach (int i in indexOfUpper)
+        foreach (int i in indexOfCeiling)
             vertices[i] -= Vector3.up * Height;
 
+        // Set Sand Particles
+        int[] indexOfOuterFloor = new int[] { 16, 18, 20, 22, 24, 26, 28, 30 };
+        Transform sandStormTr = SandStorm.transform;
+        GameObject sand = sandStormTr.GetChild(0).gameObject;
+        for (int i = 0; i<indexOfOuterFloor.Length; i+=2)
+        {
+            Vector3 a = vertices[indexOfOuterFloor[i]];
+            Vector3 b = vertices[indexOfOuterFloor[i + 1]];
+            float distance = (b - a).magnitude;
+            for(float f=0; f < distance; f+=0.04f)
+            {
+                float t = f / distance;
+                Vector3 delta = a * (1 - t) + b * t;
+                Instantiate(sand, delta, sand.transform.rotation, sandStormTr);
+            }
+        }
+
+        SandStorm.SetActive(true);
         while (elapsedTime < RunTime)
         {
             //Vector3 delta = Vector3.up * Height * Time.deltaTime / RunTime;
-            foreach (int i in indexOfLower)
+            foreach (int i in indexOfFloor)
                 uvs[i] -= Vector2.up * Height * Time.deltaTime / RunTime;
-            foreach (int i in indexOfUpper)
+            foreach (int i in indexOfCeiling)
                 vertices[i] += Vector3.up * Height * Time.deltaTime / RunTime;
 
             mesh.uv = uvs;
@@ -397,6 +428,10 @@ public class WallBuilder : MonoBehaviour {
             yield return null;
         }
 
+        for (int i = sandStormTr.childCount-1; 0 < i; --i)
+            Destroy(sandStormTr.GetChild(i).gameObject);
+        SandStorm.SetActive(false);
+        
         // After animated, Show 'Save Menu'
         SaveMenu.SetActive(true);
         yield return null;
@@ -408,7 +443,7 @@ public class WallBuilder : MonoBehaviour {
         MeshSerializer.SaveMeshToPath(MeshToSave, fileNameToSave);
         Initialize();
     }
-    public static GameObject LoadWall(string fileNameToLoad, string newWallName = "LoadedWall")
+    public static GameObject LoadWall(string fileNameToLoad, string newWallName = "Wall")
     {
         GameObject obj = new GameObject(newWallName);
         MeshFilter mf = obj.AddComponent<MeshFilter>();
@@ -422,7 +457,7 @@ public class WallBuilder : MonoBehaviour {
 
         mf.mesh = newMesh;
         mr.material = new Material(Shader.Find("Standard"));
-        mr.material.mainTexture = WallTexture;
+        //mr.material.mainTexture = WallTexture;
 
         return obj;
     }
