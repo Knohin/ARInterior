@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.574817, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -507,7 +507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 462, y: -171.00003}
+  m_AnchoredPosition: {x: 477, y: -134.99997}
   m_SizeDelta: {x: 565.69, y: 157.2}
   m_Pivot: {x: 0.5, y: 0.49999976}
 --- !u!114 &611551662
@@ -542,7 +542,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uAC00\uAD6C\uBC30\uCE58\n"
+  m_Text: "\uBAA8\uC758"
 --- !u!222 &611551663
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -621,25 +621,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1047080584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8897059, g: 1, b: 0.8897059, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_Texture: {fileID: 2800000, guid: 5b2af9037b449c743bc2dd5246d9fd76, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!222 &1047080587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -707,7 +706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 266, y: -176}
+  m_AnchoredPosition: {x: 246, y: -193}
   m_SizeDelta: {x: 565.69, y: 157.2}
   m_Pivot: {x: 0.5, y: 0.49999976}
 --- !u!114 &1091741214
@@ -731,18 +730,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: fe276f78a7125b5478149fa8e129ca3e, type: 3}
-    m_FontSize: 70
+    m_FontSize: 65
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 80
-    m_Alignment: 3
+    m_MaxSize: 300
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n       \uC2DC\uBBAC\uB808\uC774\uC158"
+  m_Text: "\n       \uC778\uD14C\uB9AC\uC5B4"
 --- !u!222 &1091741215
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -994,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 469, y: -175}
+  m_AnchoredPosition: {x: 484, y: -139}
   m_SizeDelta: {x: 565.69, y: 157.2}
   m_Pivot: {x: 0.5, y: 0.49999976}
 --- !u!114 &1188941854
@@ -1029,7 +1028,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uAC00\uAD6C\uBC30\uCE58\n"
+  m_Text: "\uBAA8\uC758"
 --- !u!222 &1188941855
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1747,7 +1746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 260, y: -172.99998}
+  m_AnchoredPosition: {x: 240, y: -190.00005}
   m_SizeDelta: {x: 565.69, y: 157.2}
   m_Pivot: {x: 0.5, y: 0.49999976}
 --- !u!114 &2067081989
@@ -1771,18 +1770,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: fe276f78a7125b5478149fa8e129ca3e, type: 3}
-    m_FontSize: 70
+    m_FontSize: 65
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 80
-    m_Alignment: 3
+    m_MaxSize: 300
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n       \uC2DC\uBBAC\uB808\uC774\uC158"
+  m_Text: "\n       \uC778\uD14C\uB9AC\uC5B4"
 --- !u!222 &2067081990
 CanvasRenderer:
   m_ObjectHideFlags: 0
