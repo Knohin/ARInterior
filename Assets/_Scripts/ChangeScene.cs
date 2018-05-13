@@ -18,7 +18,19 @@ public class ChangeScene : MonoBehaviour {
 		
 	}
 
-    public void ChangeGameScene() {
-            SceneManager.LoadScene("SelectUI");
+    public void ToSelectUI() {
+        SceneManager.LoadScene("Loading");
+    }
+
+    public void ToSave() {
+        //SceneManager.LoadScene("");
+    }
+
+    public void ToLoad() {
+
+    }
+
+    public void ToSeek() {
+        
     }
 }
