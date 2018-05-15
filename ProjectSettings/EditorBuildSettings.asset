@@ -11,6 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/SelectUI.unity
     guid: b9e68d9617e3fb344b5aac3ca35262de
-  - enabled: 1
-    path: Assets/_Scenes/Loading.unity
-    guid: ca291c233a75e4c44a85cbcf2340ddbc
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
