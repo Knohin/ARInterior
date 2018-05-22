@@ -12,5 +12,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/SelectUI.unity
     guid: b9e68d9617e3fb344b5aac3ca35262de
   - enabled: 0
+    path: Assets/_Scenes/StartUILand.unity
+    guid: 417f0cde5df8d0342b397ca9ff5167ec
+  - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
