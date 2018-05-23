@@ -5,17 +5,18 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
-public class Orientation : MonoBehaviour {
+public class Orientation2 : MonoBehaviour
+{
 
     public static event UnityAction<ScreenOrientation> orientationChangedEvent;
-    public static ScreenOrientation _orientation;
-    public GameObject portraitPanel;
-    public GameObject landscapePanel;
-    public Text DebugText;
+    private ScreenOrientation _orientation;
+    public GameObject portraitCanvus;
+    public GameObject landscapeCanvus;
+    public Text DebugText, DebugText2;
 
     void Start()
     {
-        _orientation = Screen.orientation;
+        _orientation = Orientation._orientation;
         InvokeRepeating("CheckForChange", 1, .1f);
     }
 
@@ -26,29 +27,29 @@ public class Orientation : MonoBehaviour {
     }
 
     private void CheckForChange()
-    {        
+    {
         if (_orientation != Screen.orientation)
         {
             _orientation = Screen.orientation;
             OnOrientationChanged(_orientation);
-
-            if (Input.deviceOrientation == DeviceOrientation.Portrait ||
+        }
+        if (Input.deviceOrientation == DeviceOrientation.Portrait ||
             Input.deviceOrientation == DeviceOrientation.PortraitUpsideDown)
-            {
-                portraitPanel.SetActive(true);
-                landscapePanel.SetActive(false);
-            }
-            else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
-            Input.deviceOrientation == DeviceOrientation.LandscapeRight)
-            {
-                portraitPanel.SetActive(false);
-                landscapePanel.SetActive(true);
-            }
+        {
+            portraitCanvus.SetActive(true);
+            landscapeCanvus.SetActive(false);
+        }
+        else if (Input.deviceOrientation == DeviceOrientation.LandscapeLeft ||
+        Input.deviceOrientation == DeviceOrientation.LandscapeRight)
+        {
+            portraitCanvus.SetActive(false);
+            landscapeCanvus.SetActive(true);
         }
     }
 
     void Update()
     {
         DebugText.GetComponent<Text>().text = Input.deviceOrientation.ToString();
+        DebugText2.GetComponent<Text>().text = Input.deviceOrientation.ToString();
     }
 }
