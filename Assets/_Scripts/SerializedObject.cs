@@ -16,7 +16,7 @@ public class SerializedObject :MonoBehaviour
         sd.mFurniture = gameObject.name;
         sd.mPosition = gameObject.transform.position;
         sd.mRotation = gameObject.transform.rotation;
-        sd.mScale = gameObject.transform.localScale;
+        sd.mScale = gameObject.transform.lossyScale;
 
         if (gameObject.GetComponent<changeColor>() != null)
         {
@@ -33,6 +33,11 @@ public class SerializedObject :MonoBehaviour
         gameObject.name = sd.mFurniture;
         gameObject.transform.position = sd.mPosition;
         gameObject.transform.rotation = sd.mRotation;
+        gameObject.transform.localScale = Vector3.one;
+        gameObject.transform.localScale = new Vector3(
+            sd.mScale.x / gameObject.transform.lossyScale.x,
+            sd.mScale.y / gameObject.transform.lossyScale.y,
+            sd.mScale.z / gameObject.transform.lossyScale.z);
 
         if (gameObject.GetComponent<changeColor>() != null)
         {

@@ -8,7 +8,11 @@ using Vuforia;
 public class JsonManager : MonoBehaviour
 {
     public StateManager stateManager;
-    public GameObject bed, bookshelf, desk, deskChair, gasrange, lightStand, oven, refrigerator, sink, sofa, table, tableChair, television, wardrobe;
+    public ImageTargetBehaviour TableBase;
+    public ImageTargetBehaviour FloorBase;
+    [Space(10)]
+    public GameObject bed;
+    public GameObject bookshelf, desk, deskChair, gasrange, lightStand, oven, refrigerator, sink, sofa, table, tableChair, television, wardrobe;
 
     private void Start()
     {
@@ -44,28 +48,34 @@ public class JsonManager : MonoBehaviour
     // json을 통한 오브젝트 저장
     public void SaveObjectInJson(string filename = "data")
     {
+        if (TableBase == null)
+            Debug.LogError("Table Base Target Missing");
+
         List<SerializedData> list = new List<SerializedData>();
 
         // 기준 벽
         GameObject go = GameObject.Find("Interior Group");
-        for (int i=0; i < go.transform.childCount; ++i)
+        if (go != null)
         {
-            SerializedObject so = go.transform.GetChild(i).GetComponent<SerializedObject>();
-            if (so == null)
-                continue;
-            so.SetCurrentState();
-            list.Add(so.sd);
-            Debug.Log("Wall Added");
+            for (int i = 0; i < go.transform.childCount; ++i)
+            {
+                SerializedObject so = go.transform.GetChild(i).GetComponent<SerializedObject>();
+                if (so == null)
+                    continue;
+                so.SetCurrentState();
+                list.Add(so.sd);
+            }
         }
-
         // 인식된 가구들
         var trackable = stateManager.GetActiveTrackableBehaviours();
-        if (trackable == null) Debug.Log("Trackable : " + trackable);
+        //if (trackable == null) Debug.Log("Trackable : " + trackable);
         // Warning : 아니 이게 유니티 애디터에서는 아래 포문을 돌지 않는데 
         // 안드로이드로 빌드하면 한번을 도는 문제가 있다.
         foreach (var t in trackable)
         {
-            Debug.Log("trackables : " + t);
+            if (t == TableBase || t == FloorBase)
+                continue;
+            //Debug.Log("trackables : " + t);
             SerializedObject so = t.gameObject.GetComponentInChildren<SerializedObject>();
             if (so == null)
             {
@@ -74,7 +84,16 @@ public class JsonManager : MonoBehaviour
             }
             // list에 넣기 전 현상태 불러오기
             GameObject ObjectToSave = t.gameObject.GetComponentInChildren<SerializedObject>().gameObject;
-            ObjectToSave.GetComponent<SerializedObject>().SetCurrentState();
+            // TableBase을 중심으로 이동및회전
+            Transform tr = ObjectToSave.transform;
+            tr.position -= TableBase.transform.position;
+            tr.RotateAround(Vector3.zero, Vector3.up, -TableBase.transform.rotation.eulerAngles.y);
+            tr.position = new Vector3(tr.position.x, 0, tr.position.z);
+            tr.rotation = Quaternion.Euler(new Vector3(0, tr.rotation.eulerAngles.y, 0));
+
+            tr.GetComponent<SerializedObject>().SetCurrentState();
+            tr.RotateAround(Vector3.zero, Vector3.up, TableBase.transform.rotation.eulerAngles.y);
+            tr.position += TableBase.transform.position;
             list.Add(ObjectToSave.GetComponent<SerializedObject>().sd);
         }
         // 배열의 내용을 json형식 string으로 저장
@@ -89,20 +108,19 @@ public class JsonManager : MonoBehaviour
 
         FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write);
         StreamWriter sw = new StreamWriter(file);
-        Debug.Log("all most done");
         sw.WriteLine(json);
         sw.Close();
         file.Close();
     }
 
-    public void LoadObjectFromJson(string filename)
+    public GameObject LoadObjectFromJson(string filename)
     {
         string path = pathForDocumentsFile(filename);
 
         if (!File.Exists(path))
         {
             Debug.LogError("Path doesn't Exist : " + path);
-            return;
+            return null;
         }
         // 파일로 부터 string으로 된 json을 가져온다.
         FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read);
@@ -117,24 +135,22 @@ public class JsonManager : MonoBehaviour
         GameObject interiorGroup = GameObject.Find("Interior Group");
         if (interiorGroup == null)
             interiorGroup = new GameObject("Interior Group");
+        interiorGroup.transform.position = Vector3.zero;
+        interiorGroup.transform.rotation = Quaternion.identity;
+        interiorGroup.transform.localScale = Vector3.one;
 
         // 데이터 배열로 deserialize 하여 그 정보로 오브젝트 생성
         SerializedData[] list = JsonHelper.FromJson<SerializedData>(json);
         foreach (var ObjectToLoad in list)
         {
             string name = ObjectToLoad.mFurniture.Trim();
-
-            //if (name.IndexOf("(") == 1)
-            //{
-            //    name = name.Substring(0, name.IndexOf("(") - 1);
-            //}
-
+            
             GameObject madeObject;
             switch (name)
             {
                 case "Wall":
                     madeObject = new GameObject("Wall");
-                    MeshFilter mf = madeObject.AddComponent<MeshFilter>();
+                    madeObject.AddComponent<MeshFilter>();
                     MeshRenderer mr = madeObject.AddComponent<MeshRenderer>();
                     madeObject.AddComponent<SerializedObject>();
                     mr.material = new Material(Shader.Find("Standard"));
@@ -191,6 +207,8 @@ public class JsonManager : MonoBehaviour
             madeObject.GetComponent<SerializedObject>().SetSdToObject();
             madeObject.transform.parent = interiorGroup.transform;
         }
+
+        return interiorGroup;
     }
 }
 

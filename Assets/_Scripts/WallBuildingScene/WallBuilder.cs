@@ -36,6 +36,7 @@ public class WallBuilder : MonoBehaviour {
     private GameObject GuideWall;
     private Transform GuideMarkTr;
     private GameObject GuideGrid;
+    private Material GuideGridMaterial;
 
     private GameObject wall;
 
@@ -46,10 +47,10 @@ public class WallBuilder : MonoBehaviour {
         if (GuideMarkPrefab == null || SaveMenu == null || GuideGridPrefab == null)
             Debug.LogError("Check if any public member variable is null!");
         GuideMarkTr = Instantiate(GuideMarkPrefab, Vector3.zero, GuideMarkPrefab.transform.rotation).transform;
-        GuideGrid = Instantiate(GuideGridPrefab, Vector3.zero, GuideGridPrefab.transform.rotation);
         GuideMarkTr.parent = AnchorStage.transform;
+        GuideGrid = Instantiate(GuideGridPrefab, Vector3.zero, GuideGridPrefab.transform.rotation);
         GuideGrid.transform.parent = AnchorStage.transform;
-
+        GuideGridMaterial = GuideGrid.GetComponent<MeshRenderer>().material;
         Initialize();
 
         Debug.Log("dataPath : " + Application.dataPath);
@@ -66,9 +67,12 @@ public class WallBuilder : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             GuideMarkTr.position = hit.point;
-            GuideGrid.transform.position = hit.point + Vector3.up*0.0001f;
-            GuideGrid.GetComponent<MeshRenderer>().material.mainTextureOffset = new Vector2(hit.point.x, hit.point.z);
-            Debug.Log("GuideGrid Tr : " + GuideGrid.transform.position.ToString("N3"));
+            GuideGrid.transform.position = hit.point;// + Vector3.up*0.0001f;
+            //Vector3 uvOffset = Quaternion.AngleAxis(-GuideGrid.transform.rotation.eulerAngles.y, Vector3.up) * hit.point;
+            //GuideGridMaterial.mainTextureOffset = new Vector2(uvOffset.x, uvOffset.z);
+            //Debug.Log("GuideGrid Tr : " + GuideGrid.transform.position.ToString("N3")
+            //    + "\nHit Point : " + hit.point.ToString("N3")
+            //    + "\nUV Offset : " + uvOffset.ToString("N3"));
             UpdateGuideWall(hit.point);
 
 #if UNITY_EDITOR
@@ -90,8 +94,8 @@ public class WallBuilder : MonoBehaviour {
                 touchCount++;
                 if (touchCount == 4)
                 {
-                    ReviseIndex();
-                    //BuildWall();
+                    //ReviseIndex();
+                    BuildWall();
                 }
             }
         }
@@ -205,6 +209,7 @@ public class WallBuilder : MonoBehaviour {
 
         return GuideWall;
     }
+
     private void BuildWall()
     {
         Vector3 HeightVector = Vector3.up * Height;
@@ -376,7 +381,9 @@ public class WallBuilder : MonoBehaviour {
             Destroy(transform.GetChild(i).gameObject);
 
         // Play Building Animation
-        StartCoroutine("AnimateWallRising");
+        //StartCoroutine("AnimateWallRising");
+
+        SaveMenu.SetActive(true);
     }
     IEnumerator AnimateWallRising()
     {

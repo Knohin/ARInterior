@@ -51,17 +51,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f67daa44a0293947bd197aa716436ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TableBase: {fileID: 0}
+  FloorBase: {fileID: 0}
   bed: {fileID: 1974189900842122, guid: 9aceb4dd205be394f80f0f9a45dd5947, type: 2}
   bookshelf: {fileID: 1743507870519364, guid: f950eb02ac2563f4eb13d0306768155c, type: 2}
-  desk: {fileID: 0}
-  deskChair: {fileID: 0}
-  gasrange: {fileID: 0}
-  lightStand: {fileID: 0}
-  oven: {fileID: 0}
-  refrigerator: {fileID: 0}
-  sink: {fileID: 0}
-  sofa: {fileID: 0}
-  table: {fileID: 0}
-  tableChair: {fileID: 0}
-  television: {fileID: 0}
-  wardrobe: {fileID: 0}
+  desk: {fileID: 1818317501211516, guid: 55838e5a69bf49149bcf80f71b35b2e9, type: 2}
+  deskChair: {fileID: 1863202225019116, guid: 36cd3919514a4284e83e412771cc9d0e, type: 2}
+  gasrange: {fileID: 1618372748482266, guid: eff34de5ef9e14e46be6f6323258d229, type: 2}
+  lightStand: {fileID: 1935953123715504, guid: ff9489b8082df5f48839960566ad4714, type: 2}
+  oven: {fileID: 1047228925259048, guid: da34665a8bd8c3e4ebd31bee279ab655, type: 2}
+  refrigerator: {fileID: 1284212995511394, guid: e2a604bceff4d394e9f14740a42be8f6,
+    type: 2}
+  sink: {fileID: 1004597832436382, guid: 8a0290f80f8dab345b78761581c8ed4d, type: 2}
+  sofa: {fileID: 1347753034622942, guid: 92637e9aa51f5904e976244ce178d5e7, type: 2}
+  table: {fileID: 1436135145933940, guid: cae5c82c6eda22b488a9590d49429760, type: 2}
+  tableChair: {fileID: 1934923712285312, guid: 15f978ab95b979241a098222535c8d5c, type: 2}
+  television: {fileID: 1713296702875008, guid: fc4fe0ce9e55d0b44ba634747f26d8ba, type: 2}
+  wardrobe: {fileID: 1392471183403480, guid: b76791c4ee8c71f4a981774c2a111efc, type: 2}

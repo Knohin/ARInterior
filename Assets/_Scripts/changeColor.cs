@@ -10,12 +10,8 @@ public class changeColor : MonoBehaviour {
 	// Use this for initialization
 	public void Start () {
         colors = gameObject.GetComponent<MeshRenderer>().materials;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
+	
 
     public int GetColor() {
         return colorState;
@@ -28,9 +24,7 @@ public class changeColor : MonoBehaviour {
 
     public void Change() {
         if (gameObject.name == "bed")
-        {           
             transform.Find("blanket").GetComponent<MeshRenderer>().material = colors[colorState];
-        }
         else if (gameObject.name == "desk") {
             transform.Find("body").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("drawer1").GetComponent<MeshRenderer>().material = colors[colorState];
@@ -49,8 +43,8 @@ public class changeColor : MonoBehaviour {
             transform.Find("back").GetComponent<MeshRenderer>().material = colors[colorState];
         }
         else if (gameObject.name == "wardrobe") {
-            transform.Find("animation1").Find("door1").GetComponent<MeshRenderer>().material = colors[colorState];
-            transform.Find("animation2").Find("door2").GetComponent<MeshRenderer>().material = colors[colorState];
+            transform.Find("animation1").Find("lDoor").GetComponent<MeshRenderer>().material = colors[colorState];
+            transform.Find("animation2").Find("rDoor").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("drawer").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("body").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("ceiling").GetComponent<MeshRenderer>().material = colors[colorState];
@@ -84,8 +78,8 @@ public class changeColor : MonoBehaviour {
             transform.Find("body").GetComponent<MeshRenderer>().material = colors[colorState];
         else if (gameObject.name == "refrigerator") {
             transform.Find("body").GetComponent<MeshRenderer>().material = colors[colorState];
-            transform.Find("door1").GetComponent<MeshRenderer>().material = colors[colorState];
-            transform.Find("animation").Find("door2").GetComponent<MeshRenderer>().material = colors[colorState];
+            transform.Find("uDoor").GetComponent<MeshRenderer>().material = colors[colorState];
+            transform.Find("animation").Find("dDoor").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("wall1").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("wall2").GetComponent<MeshRenderer>().material = colors[colorState];
             transform.Find("wall3").GetComponent<MeshRenderer>().material = colors[colorState];

@@ -7,6 +7,8 @@ using System.IO;
 
 public class LoadMenu : MonoBehaviour {
 
+    public Transform BaseTransform;
+
     // 파일 리스트의 UI 그룹
     private GameObject mContent;
     //private string[] mFilePaths;
@@ -95,7 +97,15 @@ public class LoadMenu : MonoBehaviour {
     {
         string fileName = mContent.transform.GetChild(mSelectedFileIdx).GetComponentInChildren<Text>().text;
         //GameObject wall = WallBuilder.LoadWall(fileName);
-        jsonManager.LoadObjectFromJson(fileName);
+        GameObject interiorGroup = jsonManager.LoadObjectFromJson(fileName);
+        interiorGroup.transform.position = BaseTransform.position;
+        interiorGroup.transform.rotation = BaseTransform.rotation;
+        interiorGroup.transform.localScale = Vector3.one * 15*2;
+
+        //interiorGroup.transform.parent = GameObject.Find("Target_floor").transform;
+
+        GameObject.Find("Plane Finder").GetComponent<DeployStageOnce>().PerformHitTestToScreenCenter();
+
 
         gameObject.SetActive(false);
     }

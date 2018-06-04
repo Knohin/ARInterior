@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="Marker-00-gray" size="10.000000 10.000000" />
+    <ImageTarget name="Marker_corner" size="0.100000 0.100000" />
+    <ImageTarget name="Marker_base_thick" size="0.200000 0.200000" />
+    <ImageTarget name="Marker_Bed" size="0.060000 0.030000" />
+    <ImageTarget name="Marker_Oven_3" size="0.060000 0.030000" />
+    <ImageTarget name="Marker_Oven_2" size="0.060000 0.030000" />
+    <ImageTarget name="Marker-00-gray" size="0.100000 0.100000" />
   </Tracking>
 </QCARConfig>

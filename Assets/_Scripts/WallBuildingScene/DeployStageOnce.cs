@@ -32,6 +32,22 @@ public class DeployStageOnce : MonoBehaviour
             return;
         }
         AnchorStage.SetActive(false);
+
+        VuforiaARController.Instance.SetWorldCenterMode(VuforiaARController.WorldCenterMode.FIRST_TARGET);
+        SmartTerrainARController.Instance.AutoInitAndStartTracker = true;
+        VuforiaConfiguration.Instance.SmartTerrain.AutoInitAndStartTracker = true;
+        //VuforiaUnity.Deinit();
+        //VuforiaUnity.OnPause();
+        //CameraDevice.Instance.Deinit();
+        //VuforiaManager.Instance.Deinit();
+        //VuforiaRuntime.Instance.Deinit();
+
+        //VuforiaARController.Instance.SetWorldCenterMode(VuforiaARController.WorldCenterMode.FIRST_TARGET);
+
+        //VuforiaRuntime.Instance.InitVuforia();
+        //VuforiaManager.Instance.Init();
+        //CameraDevice.Instance.Deinit();
+        //VuforiaUnity.OnResume();
     }
 
     public void Awake()
@@ -44,6 +60,11 @@ public class DeployStageOnce : MonoBehaviour
         VuforiaARController.Instance.UnregisterVuforiaStartedCallback(OnVuforiaStarted);
     }
 
+    private void OnVuforiaStarted()
+    {
+        _deviceTracker = TrackerManager.Instance.GetTracker<PositionalDeviceTracker>();
+    }
+
     public void Update()
     {
         //if (AnchorStage != null)
@@ -52,10 +73,6 @@ public class DeployStageOnce : MonoBehaviour
         PlaneFinder.Height = (Camera.main.transform.position.y - ImageTarget.transform.position.y);
     }
 
-    private void OnVuforiaStarted()
-    {
-        _deviceTracker = TrackerManager.Instance.GetTracker<PositionalDeviceTracker>();
-    }
 
 
     public void OnInteractiveHitTest(HitTestResult result)
@@ -79,8 +96,6 @@ public class DeployStageOnce : MonoBehaviour
             AnchorStage.transform.localPosition = Vector3.zero;
             AnchorStage.transform.localRotation = Quaternion.identity;
             AnchorStage.SetActive(true);
-            //anchor.transform.position = ImageTarget.transform.position;
-            //anchor.transform.rotation = ImageTarget.transform.rotation;
         }
 
         if (_previousAnchor != null)
@@ -92,18 +107,12 @@ public class DeployStageOnce : MonoBehaviour
         Debug.Log("-------------------------------Hit Test Works");
 
         // 마커 회전에 맞게 회전시키기
-        // AnchorStage or _previousAnchor
-        //if (AnchorStage != null)
-        //    AnchorStage.transform.rotation = Camera.main.transform.rotation;
-
         //if (AnchorStage != null)
         //{
         //    Vector3 tempRotation = AnchorStage.transform.rotation.eulerAngles;
         //    tempRotation.y = Camera.main.transform.rotation.eulerAngles.y;
-
         //    AnchorStage.transform.rotation = Quaternion.Euler(tempRotation);
         //}
-
         if (AnchorStage != null)
         {
             //float angle = Quaternion.Angle(AnchorStage.transform.rotation, Camera.main.transform.rotation);
