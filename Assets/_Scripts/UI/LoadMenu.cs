@@ -101,9 +101,7 @@ public class LoadMenu : MonoBehaviour {
         interiorGroup.transform.position = BaseTransform.position;
         interiorGroup.transform.rotation = BaseTransform.rotation;
         interiorGroup.transform.localScale = Vector3.one * 15*2;
-
-        //interiorGroup.transform.parent = GameObject.Find("Target_floor").transform;
-
+        
         GameObject.Find("Plane Finder").GetComponent<DeployStageOnce>().PerformHitTestToScreenCenter();
 
 

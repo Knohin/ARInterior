@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: 114440070431242548}
   - component: {fileID: 114750641834342606}
   - component: {fileID: 114431621548042968}
-  - component: {fileID: 54947564091547996}
   m_Layer: 0
   m_Name: desk
   m_TagString: Untagged
@@ -507,7 +506,7 @@ Transform:
   m_GameObject: {fileID: 1818317501211516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 0.033333335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512492050446934}
   - {fileID: 4919508924922794}
@@ -1160,21 +1159,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669645980423136}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54947564091547996
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1818317501211516}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!65 &65036700668240082
 BoxCollider:
   m_ObjectHideFlags: 1

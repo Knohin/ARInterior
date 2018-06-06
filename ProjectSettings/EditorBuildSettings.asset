@@ -9,14 +9,8 @@ EditorBuildSettings:
     path: Assets/_Scenes/00_Start.unity
     guid: 16d6f3c54a10691418e80b6b2bbdc0d6
   - enabled: 1
-    path: Assets/_Scenes/01_OnTable.unity
-    guid: b9e68d9617e3fb344b5aac3ca35262de
+    path: Assets/_Scenes/01_SelectUI.unity
+    guid: fc5794ff2d275054e84c47ad4a91d3c5
   - enabled: 1
     path: Assets/_Scenes/02_GroundPlane.unity
     guid: 4c99db292d1fcc84eac5bed91a6839f3
-  - enabled: 0
-    path: Assets/_Scenes/03_OnTable_old.unity
-    guid: 241ccf5553223a741a7200b2b2dca004
-  - enabled: 0
-    path: Assets/_Scenes/BuildingWallInVirtual.unity
-    guid: 4a9e9771bd2871a4b8cca91b323a3e51

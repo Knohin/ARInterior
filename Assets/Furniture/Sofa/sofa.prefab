@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: 114083199401628618}
   - component: {fileID: 114096952763447146}
   - component: {fileID: 114793778794021098}
-  - component: {fileID: 54459828770125746}
   m_Layer: 0
   m_Name: sofa
   m_TagString: Untagged
@@ -800,7 +799,7 @@ Transform:
   m_GameObject: {fileID: 1347753034622942}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4632032958353372}
   - {fileID: 4776236701878324}
@@ -1890,21 +1889,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821165896866594}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54459828770125746
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1347753034622942}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!65 &65094432684935322
 BoxCollider:
   m_ObjectHideFlags: 1

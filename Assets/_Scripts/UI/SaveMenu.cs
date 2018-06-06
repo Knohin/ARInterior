@@ -7,34 +7,29 @@ using System.IO;
 public class SaveMenu : MonoBehaviour {
 
     private JsonManager jsonManager;
-    private WallBuilder wallBuilder;
 
     public GameObject[] ObjectToSaveInEditor;
 
     private void Start()
     {
         jsonManager = GameObject.Find("JsonManager").GetComponent<JsonManager>();
-        wallBuilder = GameObject.Find("WallBuilder").GetComponent<WallBuilder>();
-        if (jsonManager == null || wallBuilder == null)
+        if (jsonManager == null)
             Debug.LogError("Component Miss!!! 12099ufs0");
     }
 
     public void OnSaveButtonClicked()
     {
         string fileName = this.GetComponentInChildren<InputField>().text;
-        //wallBuilder.SaveWall(fileName);
         jsonManager.SaveObjectInJson(fileName);
-
-        wallBuilder.Initialize();
+        
         gameObject.SetActive(false);
     }
     public void OnCancleButtonClicked()
     {
-        wallBuilder.Initialize();
         gameObject.SetActive(false);
     }
 
-    public void SaveInEditor(string filename = "aaa.json")
+    public void SaveInEditor(string filename = "SaveTable01.json")
     {
         Vuforia.StateManager stateManager = Vuforia.TrackerManager.Instance.GetStateManager();
 
@@ -43,6 +38,7 @@ public class SaveMenu : MonoBehaviour {
         // 인식된 가구들
         var trackable = stateManager.GetActiveTrackableBehaviours();
         if (trackable == null) Debug.Log("Trackable : " + trackable);
+
         // Warning : 아니 이게 유니티 애디터에서는 아래 포문을 돌지 않는데 
         // 안드로이드로 빌드하면 한번을 도는 문제가 있다.
         foreach (var t in ObjectToSaveInEditor)

@@ -10,6 +10,7 @@ public class JsonManager : MonoBehaviour
     public StateManager stateManager;
     public ImageTargetBehaviour TableBase;
     public ImageTargetBehaviour FloorBase;
+    public InputField saveField;
     [Space(10)]
     public GameObject bed;
     public GameObject bookshelf, desk, deskChair, gasrange, lightStand, oven, refrigerator, sink, sofa, table, tableChair, television, wardrobe;
@@ -23,21 +24,19 @@ public class JsonManager : MonoBehaviour
     // 저장파일 경로
     public string pathForDocumentsFile(string filename)
     {
-        // 아이폰(미테스트)
+        // 아이폰(non-Test)
         if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
             string path = Application.dataPath.Substring(0, Application.dataPath.Length - 5) + "/Resources";
-            //path = path.Substring(0, path.LastIndexOf('/'));
             return Path.Combine(Path.Combine(path, "Documents"), filename);
         }
         // 안드로이드
         else if (Application.platform == RuntimePlatform.Android)
         {
             string path = Application.persistentDataPath + "/Resources";
-            //path = path.Substring(0, path.LastIndexOf('/'));
             return Path.Combine(path, filename);
         }
-        // pc
+        // PC
         else
         {
             string path = Application.dataPath + "/Resources";
@@ -66,16 +65,15 @@ public class JsonManager : MonoBehaviour
                 list.Add(so.sd);
             }
         }
+
         // 인식된 가구들
         var trackable = stateManager.GetActiveTrackableBehaviours();
-        //if (trackable == null) Debug.Log("Trackable : " + trackable);
-        // Warning : 아니 이게 유니티 애디터에서는 아래 포문을 돌지 않는데 
+        // Warning : 유니티 애디터에서는 아래 포문을 돌지 않지만
         // 안드로이드로 빌드하면 한번을 도는 문제가 있다.
         foreach (var t in trackable)
         {
             if (t == TableBase || t == FloorBase)
                 continue;
-            //Debug.Log("trackables : " + t);
             SerializedObject so = t.gameObject.GetComponentInChildren<SerializedObject>();
             if (so == null)
             {
@@ -84,6 +82,7 @@ public class JsonManager : MonoBehaviour
             }
             // list에 넣기 전 현상태 불러오기
             GameObject ObjectToSave = t.gameObject.GetComponentInChildren<SerializedObject>().gameObject;
+
             // TableBase을 중심으로 이동및회전
             Transform tr = ObjectToSave.transform;
             tr.position -= TableBase.transform.position;
@@ -104,6 +103,7 @@ public class JsonManager : MonoBehaviour
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/Resources");
         }
+        filename = saveField.text;
         string path = pathForDocumentsFile(filename);
 
         FileStream file = new FileStream(path, FileMode.Create, FileAccess.Write);

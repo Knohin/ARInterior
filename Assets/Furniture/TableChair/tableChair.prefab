@@ -225,7 +225,6 @@ GameObject:
   - component: {fileID: 114619850797264236}
   - component: {fileID: 114599242002117704}
   - component: {fileID: 114749262975562842}
-  - component: {fileID: 54960397906045122}
   m_Layer: 0
   m_Name: tableChair
   m_TagString: Untagged
@@ -311,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 1934923712285312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.033333335, y: 0.033333335, z: 0.033333335}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4771974486517980}
   - {fileID: 4999586170520398}
@@ -576,21 +575,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817803806062160}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54960397906045122
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1934923712285312}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!65 &65277476590218642
 BoxCollider:
   m_ObjectHideFlags: 1
